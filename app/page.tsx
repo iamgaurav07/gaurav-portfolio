@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function Portfolio() {
   const [formData, setFormData] = useState({
@@ -10,6 +10,17 @@ export default function Portfolio() {
   const [sending, setSending] = useState(false);
   const [sent, setSent] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const handleNavClick = () => {
+    setMobileMenuOpen(false);
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -240,30 +251,260 @@ export default function Portfolio() {
     >
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500;600&display=swap');
-        *{box-sizing:border-box;margin:0;padding:0}
-        html{scroll-behavior:smooth}
-        ::-webkit-scrollbar{width:3px}
-        ::-webkit-scrollbar-track{background:#0D0D0B}
-        ::-webkit-scrollbar-thumb{background:#2A2A26;border-radius:2px}
-        a{text-decoration:none;color:inherit}
-        @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
-        @keyframes pulseGreen{0%,100%{opacity:1}50%{opacity:0.4}}
-        @keyframes spin{to{transform:rotate(360deg)}}
-        .fade1{animation:fadeUp 0.6s ease 0.1s both}
-        .fade2{animation:fadeUp 0.6s ease 0.2s both}
-        .fade3{animation:fadeUp 0.6s ease 0.3s both}
-        .fade4{animation:fadeUp 0.6s ease 0.4s both}
-        .fade5{animation:fadeUp 0.6s ease 0.5s both}
-        .project-card{transition:all 0.2s}
-        .project-card:hover{transform:translateY(-2px);border-color:#3A3A36 !important}
-        .blog-card{transition:all 0.2s}
-        .blog-card:hover{transform:translateY(-2px);border-color:#3A3A36 !important}
-        .contact-link{transition:all 0.2s}
-        .contact-link:hover{transform:translateX(4px);border-color:#3A3A36 !important;color:#F0EFE8 !important}
-        .skill-item{transition:all 0.15s;cursor:default}
-        .skill-item:hover{color:#F0EFE8 !important;border-color:#3A3A36 !important}
-        .nav-link-item{transition:color 0.2s}
-        .nav-link-item:hover{color:#F0EFE8 !important}
+        
+        * {
+          box-sizing: border-box;
+          margin: 0;
+          padding: 0;
+        }
+        
+        html {
+          scroll-behavior: smooth;
+        }
+        
+        ::-webkit-scrollbar {
+          width: 3px;
+        }
+        
+        ::-webkit-scrollbar-track {
+          background: #0D0D0B;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+          background: #2A2A26;
+          border-radius: 2px;
+        }
+        
+        a {
+          text-decoration: none;
+          color: inherit;
+        }
+        
+        @keyframes fadeUp {
+          from {
+            opacity: 0;
+            transform: translateY(16px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        
+        @keyframes pulseGreen {
+          0%, 100% {
+            opacity: 1;
+          }
+          50% {
+            opacity: 0.4;
+          }
+        }
+        
+        @keyframes spin {
+          to {
+            transform: rotate(360deg);
+          }
+        }
+        
+        .fade1 {
+          animation: fadeUp 0.6s ease 0.1s both;
+        }
+        .fade2 {
+          animation: fadeUp 0.6s ease 0.2s both;
+        }
+        .fade3 {
+          animation: fadeUp 0.6s ease 0.3s both;
+        }
+        .fade4 {
+          animation: fadeUp 0.6s ease 0.4s both;
+        }
+        .fade5 {
+          animation: fadeUp 0.6s ease 0.5s both;
+        }
+        
+        .project-card {
+          transition: all 0.2s;
+        }
+        .project-card:hover {
+          transform: translateY(-2px);
+          border-color: #3A3A36 !important;
+        }
+        
+        .blog-card {
+          transition: all 0.2s;
+        }
+        .blog-card:hover {
+          transform: translateY(-2px);
+          border-color: #3A3A36 !important;
+        }
+        
+        .contact-link {
+          transition: all 0.2s;
+        }
+        .contact-link:hover {
+          transform: translateX(4px);
+          border-color: #3A3A36 !important;
+          color: #F0EFE8 !important;
+        }
+        
+        .skill-item {
+          transition: all 0.15s;
+          cursor: default;
+        }
+        .skill-item:hover {
+          color: #F0EFE8 !important;
+          border-color: #3A3A36 !important;
+        }
+        
+        .nav-link-item {
+          transition: color 0.2s;
+        }
+        .nav-link-item:hover {
+          color: #F0EFE8 !important;
+        }
+        
+        /* Mobile menu overlay */
+        .mobile-menu {
+          position: fixed;
+          top: 64px;
+          left: 0;
+          right: 0;
+          background: rgba(13, 13, 11, 0.98);
+          backdrop-filter: blur(20px);
+          border-bottom: 1px solid #1C1C19;
+          padding: 20px;
+          z-index: 99;
+          transform: translateY(-100%);
+          opacity: 0;
+          transition: all 0.3s ease;
+          pointer-events: none;
+        }
+        
+        .mobile-menu.open {
+          transform: translateY(0);
+          opacity: 1;
+          pointer-events: all;
+        }
+        
+        /* Desktop styles */
+        @media (min-width: 769px) {
+          .mobile-nav-toggle {
+            display: none !important;
+          }
+          .mobile-menu {
+            display: none !important;
+          }
+          .project-grid-item {
+            padding: 36px !important;
+          }
+          .contact-form {
+            padding: 32px !important;
+          }
+          section {
+            padding-left: 48px !important;
+            padding-right: 48px !important;
+          }
+          .education-card {
+            padding: 24px 28px !important;
+          }
+          .skills-card {
+            padding: 28px 32px !important;
+          }
+          .blog-card {
+            padding: 28px !important;
+          }
+          .hero-section {
+            padding: 140px 48px 100px !important;
+          }
+        }
+        
+        /* Mobile styles */
+        @media (max-width: 768px) {
+          .desktop-nav {
+            display: none !important;
+          }
+          .mobile-nav-toggle {
+            display: flex !important;
+          }
+          .hero-stats {
+            flex-direction: column !important;
+            align-items: flex-start !important;
+            gap: 20px !important;
+          }
+          .stats-divider {
+            display: none !important;
+          }
+          .project-grid-item {
+            grid-template-columns: 1fr !important;
+            padding: 24px !important;
+          }
+          .skills-grid {
+            grid-template-columns: 1fr !important;
+          }
+          .experience-grid {
+            grid-template-columns: 1fr !important;
+            gap: 16px !important;
+          }
+          .experience-date {
+            margin-bottom: 8px !important;
+          }
+          .education-grid {
+            grid-template-columns: 1fr !important;
+          }
+          .blog-grid {
+            grid-template-columns: 1fr !important;
+          }
+          .contact-grid {
+            grid-template-columns: 1fr !important;
+            gap: 32px !important;
+          }
+          .footer-content {
+            flex-direction: column !important;
+            gap: 16px !important;
+            text-align: center !important;
+          }
+          .hero-buttons {
+            flex-direction: column !important;
+            width: 100% !important;
+          }
+          .hero-buttons a, .hero-buttons button {
+            width: 100% !important;
+            justify-content: center !important;
+          }
+          .project-buttons {
+            flex-direction: column !important;
+          }
+          .project-buttons a {
+            width: 100% !important;
+            justify-content: center !important;
+          }
+        }
+        
+        @media (max-width: 480px) {
+          .nav-logo {
+            font-size: 18px !important;
+          }
+          .hero-title {
+            font-size: 42px !important;
+          }
+          .hero-subtitle {
+            font-size: 14px !important;
+          }
+          .section-title {
+            font-size: 32px !important;
+          }
+          .project-title {
+            font-size: 24px !important;
+          }
+          .skill-item {
+            font-size: 11px !important;
+            padding: 4px 10px !important;
+          }
+          .footer-links {
+            flex-wrap: wrap !important;
+            justify-content: center !important;
+          }
+        }
       `}</style>
 
       {/* NAV */}
@@ -274,29 +515,35 @@ export default function Portfolio() {
           left: 0,
           right: 0,
           zIndex: 100,
-          padding: "0 48px",
+          padding: "0 20px",
           height: 64,
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
-          background: "rgba(13,13,11,0.85)",
+          background: scrolled ? "rgba(13,13,11,0.95)" : "rgba(13,13,11,0.85)",
           backdropFilter: "blur(20px)",
           borderBottom: "1px solid #1C1C19",
+          transition: "all 0.3s ease",
         }}
       >
         <a
           href="#"
+          className="nav-logo"
           style={{
             fontFamily: "'Syne', sans-serif",
             fontWeight: 800,
-            fontSize: 22,
+            fontSize: "clamp(18px, 5vw, 22px)",
             letterSpacing: "-0.02em",
             color: "#F0EFE8",
           }}
         >
           Gaurav<span style={{ color: "#E8FF5A" }}>.</span>
         </a>
-        <div style={{ display: "flex", alignItems: "center", gap: 32 }}>
+
+        <div
+          className="desktop-nav"
+          style={{ display: "flex", alignItems: "center", gap: 32 }}
+        >
           {["Projects", "Skills", "Experience", "Blog", "Contact"].map(
             (link) => (
               <a
@@ -315,8 +562,10 @@ export default function Portfolio() {
             ),
           )}
         </div>
+
         <button
           onClick={handleDownload}
+          className="desktop-nav"
           style={{
             background: "#E8FF5A",
             color: "#0D0D0B",
@@ -332,16 +581,108 @@ export default function Portfolio() {
         >
           Download CV
         </button>
+
+        <button
+          className="mobile-nav-toggle"
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          style={{
+            background: "transparent",
+            border: "1px solid #2A2A26",
+            borderRadius: 8,
+            padding: "8px 12px",
+            cursor: "pointer",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#F0EFE8"
+            strokeWidth="2"
+            strokeLinecap="round"
+          >
+            {mobileMenuOpen ? (
+              <>
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+              </>
+            ) : (
+              <>
+                <line x1="3" y1="12" x2="21" y2="12" />
+                <line x1="3" y1="6" x2="21" y2="6" />
+                <line x1="3" y1="18" x2="21" y2="18" />
+              </>
+            )}
+          </svg>
+        </button>
       </nav>
+
+      <div className={`mobile-menu ${mobileMenuOpen ? "open" : ""}`}>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: 16,
+            alignItems: "center",
+          }}
+        >
+          {["Projects", "Skills", "Experience", "Blog", "Contact"].map(
+            (link) => (
+              <a
+                key={link}
+                href={`#${link.toLowerCase()}`}
+                onClick={handleNavClick}
+                style={{
+                  fontSize: 16,
+                  fontWeight: 500,
+                  color: "#9B9A92",
+                  fontFamily: "'DM Sans', sans-serif",
+                  padding: "8px 0",
+                  width: "100%",
+                  textAlign: "center",
+                }}
+              >
+                {link}
+              </a>
+            ),
+          )}
+          <button
+            onClick={() => {
+              handleDownload();
+              handleNavClick();
+            }}
+            style={{
+              background: "#E8FF5A",
+              color: "#0D0D0B",
+              padding: "10px 24px",
+              borderRadius: 100,
+              fontWeight: 700,
+              fontSize: 14,
+              fontFamily: "'DM Sans', sans-serif",
+              cursor: "pointer",
+              border: "none",
+              marginTop: 8,
+              width: "100%",
+            }}
+          >
+            Download CV
+          </button>
+        </div>
+      </div>
 
       {/* HERO */}
       <section
+        className="hero-section"
         style={{
           minHeight: "100vh",
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
-          padding: "120px 48px 80px",
+          padding: "120px 20px 80px",
           position: "relative",
           overflow: "hidden",
         }}
@@ -386,7 +727,7 @@ export default function Portfolio() {
               background: "rgba(34,197,94,0.08)",
               border: "1px solid rgba(34,197,94,0.2)",
               color: "#4ADE80",
-              fontSize: 12,
+              fontSize: "clamp(10px, 3vw, 12px)",
               fontWeight: 500,
               padding: "6px 14px",
               borderRadius: 100,
@@ -408,10 +749,10 @@ export default function Portfolio() {
           </div>
 
           <h1
-            className="fade2"
+            className="fade2 hero-title"
             style={{
               fontFamily: "'Syne', sans-serif",
-              fontSize: "clamp(52px, 7vw, 88px)",
+              fontSize: "clamp(42px, 10vw, 88px)",
               fontWeight: 800,
               lineHeight: 0.95,
               letterSpacing: "-0.04em",
@@ -426,10 +767,10 @@ export default function Portfolio() {
           </h1>
 
           <p
-            className="fade3"
+            className="fade3 hero-subtitle"
             style={{
               fontFamily: "'DM Sans', sans-serif",
-              fontSize: 17,
+              fontSize: "clamp(14px, 4vw, 17px)",
               color: "#9B9A92",
               lineHeight: 1.7,
               maxWidth: 520,
@@ -442,7 +783,7 @@ export default function Portfolio() {
           </p>
 
           <div
-            className="fade4"
+            className="fade4 hero-buttons"
             style={{
               display: "flex",
               alignItems: "center",
@@ -524,7 +865,7 @@ export default function Portfolio() {
           </div>
 
           <div
-            className="fade5"
+            className="fade5 hero-stats"
             style={{
               display: "flex",
               alignItems: "center",
@@ -532,6 +873,7 @@ export default function Portfolio() {
               marginTop: 64,
               paddingTop: 48,
               borderTop: "1px solid #1C1C19",
+              flexWrap: "wrap",
             }}
           >
             {[
@@ -545,6 +887,7 @@ export default function Portfolio() {
               >
                 {i > 0 && (
                   <div
+                    className="stats-divider"
                     style={{ width: 1, height: 40, background: "#2A2A26" }}
                   />
                 )}
@@ -552,7 +895,7 @@ export default function Portfolio() {
                   <div
                     style={{
                       fontFamily: "'Syne', sans-serif",
-                      fontSize: 32,
+                      fontSize: "clamp(28px, 6vw, 32px)",
                       fontWeight: 800,
                       letterSpacing: "-0.04em",
                       lineHeight: 1,
@@ -582,7 +925,7 @@ export default function Portfolio() {
       <section
         id="projects"
         style={{
-          padding: "100px 48px",
+          padding: "80px 20px",
           background: "#141412",
           borderTop: "1px solid #1C1C19",
           borderBottom: "1px solid #1C1C19",
@@ -606,9 +949,10 @@ export default function Portfolio() {
             Selected Work
           </div>
           <h2
+            className="section-title"
             style={{
               fontFamily: "'Syne', sans-serif",
-              fontSize: "clamp(32px, 4vw, 52px)",
+              fontSize: "clamp(32px, 6vw, 52px)",
               fontWeight: 800,
               letterSpacing: "-0.04em",
               marginBottom: 48,
@@ -621,15 +965,15 @@ export default function Portfolio() {
             {projects.map((p) => (
               <div
                 key={p.number}
-                className="project-card"
+                className="project-card project-grid-item"
                 style={{
                   background: "#0D0D0B",
                   border: "1px solid #1C1C19",
                   borderRadius: 12,
-                  padding: "36px",
+                  padding: "24px",
                   display: "grid",
                   gridTemplateColumns: "1fr auto",
-                  gap: 32,
+                  gap: 24,
                   alignItems: "start",
                 }}
               >
@@ -646,9 +990,10 @@ export default function Portfolio() {
                     {p.number}
                   </div>
                   <h3
+                    className="project-title"
                     style={{
                       fontFamily: "'Syne', sans-serif",
-                      fontSize: 28,
+                      fontSize: "clamp(22px, 5vw, 28px)",
                       fontWeight: 700,
                       letterSpacing: "-0.03em",
                       marginBottom: 10,
@@ -664,7 +1009,6 @@ export default function Portfolio() {
                       lineHeight: 1.7,
                       marginBottom: 20,
                       fontWeight: 300,
-                      maxWidth: 560,
                     }}
                   >
                     {p.desc}
@@ -695,7 +1039,10 @@ export default function Portfolio() {
                       </span>
                     ))}
                   </div>
-                  <div style={{ display: "flex", gap: 10 }}>
+                  <div
+                    className="project-buttons"
+                    style={{ display: "flex", gap: 10, flexWrap: "wrap" }}
+                  >
                     <a
                       href={p.live}
                       target="_blank"
@@ -790,7 +1137,12 @@ export default function Portfolio() {
       </section>
 
       {/* SKILLS */}
-      <section id="skills" style={{ padding: "100px 48px" }}>
+      <section
+        id="skills"
+        style={{
+          padding: "80px 20px",
+        }}
+      >
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <div
             style={{
@@ -809,9 +1161,10 @@ export default function Portfolio() {
             What I work with
           </div>
           <h2
+            className="section-title"
             style={{
               fontFamily: "'Syne', sans-serif",
-              fontSize: "clamp(32px, 4vw, 52px)",
+              fontSize: "clamp(32px, 6vw, 52px)",
               fontWeight: 800,
               letterSpacing: "-0.04em",
               marginBottom: 48,
@@ -821,20 +1174,22 @@ export default function Portfolio() {
           </h2>
 
           <div
+            className="skills-grid"
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(3, 1fr)",
+              gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
               gap: 2,
             }}
           >
             {skills.map((s) => (
               <div
                 key={s.label}
+                className="skills-card"
                 style={{
                   background: "#141412",
                   border: "1px solid #1C1C19",
                   borderRadius: 12,
-                  padding: "28px 32px",
+                  padding: "24px",
                 }}
               >
                 <div
@@ -856,7 +1211,7 @@ export default function Portfolio() {
                       className="skill-item"
                       style={{
                         fontFamily: "'DM Sans', sans-serif",
-                        fontSize: 13,
+                        fontSize: "clamp(11px, 3vw, 13px)",
                         color: "#9B9A92",
                         background: "#1C1C19",
                         border: "1px solid #2A2A26",
@@ -878,7 +1233,7 @@ export default function Portfolio() {
       <section
         id="experience"
         style={{
-          padding: "100px 48px",
+          padding: "80px 20px",
           background: "#141412",
           borderTop: "1px solid #1C1C19",
           borderBottom: "1px solid #1C1C19",
@@ -902,9 +1257,10 @@ export default function Portfolio() {
             Where I&apos;ve worked
           </div>
           <h2
+            className="section-title"
             style={{
               fontFamily: "'Syne', sans-serif",
-              fontSize: "clamp(32px, 4vw, 52px)",
+              fontSize: "clamp(32px, 6vw, 52px)",
               fontWeight: 800,
               letterSpacing: "-0.04em",
               marginBottom: 48,
@@ -917,6 +1273,7 @@ export default function Portfolio() {
             {experience.map((e, i) => (
               <div
                 key={e.company}
+                className="experience-grid"
                 style={{
                   display: "grid",
                   gridTemplateColumns: "180px 1fr",
@@ -927,7 +1284,7 @@ export default function Portfolio() {
                   alignItems: "start",
                 }}
               >
-                <div>
+                <div className="experience-date">
                   <div
                     style={{
                       fontFamily: "'DM Mono', monospace",
@@ -954,7 +1311,7 @@ export default function Portfolio() {
                   <div
                     style={{
                       fontFamily: "'Syne', sans-serif",
-                      fontSize: 20,
+                      fontSize: "clamp(18px, 4vw, 20px)",
                       fontWeight: 700,
                       letterSpacing: "-0.02em",
                       marginBottom: 4,
@@ -986,7 +1343,7 @@ export default function Portfolio() {
                         key={b}
                         style={{
                           fontFamily: "'DM Sans', sans-serif",
-                          fontSize: 13,
+                          fontSize: "clamp(12px, 3.5vw, 13px)",
                           color: "#9B9A92",
                           paddingLeft: 16,
                           position: "relative",
@@ -1034,9 +1391,10 @@ export default function Portfolio() {
               Education
             </div>
             <div
+              className="education-grid"
               style={{
                 display: "grid",
-                gridTemplateColumns: "repeat(2, 1fr)",
+                gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
                 gap: 2,
               }}
             >
@@ -1056,17 +1414,18 @@ export default function Portfolio() {
               ].map((edu) => (
                 <div
                   key={edu.degree}
+                  className="education-card"
                   style={{
                     background: "#0D0D0B",
                     border: "1px solid #1C1C19",
                     borderRadius: 12,
-                    padding: "24px 28px",
+                    padding: "24px",
                   }}
                 >
                   <div
                     style={{
                       fontFamily: "'Syne', sans-serif",
-                      fontSize: 16,
+                      fontSize: "clamp(14px, 4vw, 16px)",
                       fontWeight: 700,
                       letterSpacing: "-0.02em",
                       marginBottom: 6,
@@ -1077,7 +1436,7 @@ export default function Portfolio() {
                   <div
                     style={{
                       fontFamily: "'DM Sans', sans-serif",
-                      fontSize: 13,
+                      fontSize: "clamp(12px, 3.5vw, 13px)",
                       color: "#9B9A92",
                       marginBottom: 8,
                     }}
@@ -1101,7 +1460,12 @@ export default function Portfolio() {
       </section>
 
       {/* BLOG */}
-      <section id="blog" style={{ padding: "100px 48px" }}>
+      <section
+        id="blog"
+        style={{
+          padding: "80px 20px",
+        }}
+      >
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <div
             style={{
@@ -1120,9 +1484,10 @@ export default function Portfolio() {
             Writing
           </div>
           <h2
+            className="section-title"
             style={{
               fontFamily: "'Syne', sans-serif",
-              fontSize: "clamp(32px, 4vw, 52px)",
+              fontSize: "clamp(32px, 6vw, 52px)",
               fontWeight: 800,
               letterSpacing: "-0.04em",
               marginBottom: 48,
@@ -1132,9 +1497,10 @@ export default function Portfolio() {
           </h2>
 
           <div
+            className="blog-grid"
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(3, 1fr)",
+              gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
               gap: 2,
             }}
           >
@@ -1146,7 +1512,7 @@ export default function Portfolio() {
                   background: "#141412",
                   border: "1px solid #1C1C19",
                   borderRadius: 12,
-                  padding: "28px",
+                  padding: "24px",
                   display: "flex",
                   flexDirection: "column",
                   gap: 12,
@@ -1166,7 +1532,7 @@ export default function Portfolio() {
                 <div
                   style={{
                     fontFamily: "'Syne', sans-serif",
-                    fontSize: 18,
+                    fontSize: "clamp(16px, 4vw, 18px)",
                     fontWeight: 700,
                     color: "#F0EFE8",
                     lineHeight: 1.3,
@@ -1178,7 +1544,7 @@ export default function Portfolio() {
                 <div
                   style={{
                     fontFamily: "'DM Sans', sans-serif",
-                    fontSize: 13,
+                    fontSize: "clamp(12px, 3.5vw, 13px)",
                     color: "#9B9A92",
                     lineHeight: 1.6,
                     fontWeight: 300,
@@ -1218,7 +1584,7 @@ export default function Portfolio() {
       <section
         id="contact"
         style={{
-          padding: "100px 48px",
+          padding: "80px 20px",
           background: "#141412",
           borderTop: "1px solid #1C1C19",
         }}
@@ -1241,9 +1607,10 @@ export default function Portfolio() {
             Let&apos;s work together
           </div>
           <h2
+            className="section-title"
             style={{
               fontFamily: "'Syne', sans-serif",
-              fontSize: "clamp(32px, 4vw, 52px)",
+              fontSize: "clamp(32px, 6vw, 52px)",
               fontWeight: 800,
               letterSpacing: "-0.04em",
               marginBottom: 48,
@@ -1253,9 +1620,10 @@ export default function Portfolio() {
           </h2>
 
           <div
+            className="contact-grid"
             style={{
               display: "grid",
-              gridTemplateColumns: "1fr 1fr",
+              gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
               gap: 48,
               alignItems: "start",
             }}
@@ -1264,7 +1632,7 @@ export default function Portfolio() {
               <p
                 style={{
                   fontFamily: "'DM Sans', sans-serif",
-                  fontSize: 16,
+                  fontSize: "clamp(14px, 4vw, 16px)",
                   color: "#9B9A92",
                   lineHeight: 1.7,
                   marginBottom: 36,
@@ -1334,7 +1702,7 @@ export default function Portfolio() {
                     <span
                       style={{
                         fontFamily: "'DM Mono', monospace",
-                        fontSize: 12,
+                        fontSize: "clamp(10px, 3vw, 12px)",
                       }}
                     >
                       {link.label}
@@ -1345,11 +1713,12 @@ export default function Portfolio() {
             </div>
 
             <div
+              className="contact-form"
               style={{
                 background: "#0D0D0B",
                 border: "1px solid #1C1C19",
                 borderRadius: 14,
-                padding: "32px",
+                padding: "24px",
               }}
             >
               <form
@@ -1511,54 +1880,67 @@ export default function Portfolio() {
       {/* FOOTER */}
       <footer
         style={{
-          padding: "28px 48px",
+          padding: "28px 20px",
           borderTop: "1px solid #1C1C19",
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
         }}
       >
         <div
+          className="footer-content"
           style={{
-            fontFamily: "'Syne', sans-serif",
-            fontWeight: 800,
-            fontSize: 20,
-            letterSpacing: "-0.02em",
+            maxWidth: 1100,
+            margin: "0 auto",
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            flexWrap: "wrap",
+            gap: 16,
           }}
         >
-          Gaurav<span style={{ color: "#E8FF5A" }}>.</span>
-        </div>
-        <div
-          style={{
-            fontFamily: "'DM Mono', monospace",
-            fontSize: 11,
-            color: "#5A5A54",
-          }}
-        >
-          © 2025 Gaurav Kumar · Berlin, Germany
-        </div>
-        <div style={{ display: "flex", gap: 16 }}>
-          {[
-            ["GitHub", "https://github.com/iamgaurav07"],
-            ["LinkedIn", "https://linkedin.com/in/iamgaurav1993"],
-            ["Email", "mailto:iamgaurav1993@gmail.com"],
-          ].map(([label, href]) => (
-            <a
-              key={label}
-              href={href}
-              target="_blank"
-              style={{
-                fontFamily: "'DM Mono', monospace",
-                fontSize: 11,
-                color: "#5A5A54",
-                transition: "color 0.2s",
-              }}
-              onMouseEnter={(e) => (e.currentTarget.style.color = "#9B9A92")}
-              onMouseLeave={(e) => (e.currentTarget.style.color = "#5A5A54")}
-            >
-              {label}
-            </a>
-          ))}
+          <div
+            style={{
+              fontFamily: "'Syne', sans-serif",
+              fontWeight: 800,
+              fontSize: "clamp(16px, 4vw, 20px)",
+              letterSpacing: "-0.02em",
+            }}
+          >
+            Gaurav<span style={{ color: "#E8FF5A" }}>.</span>
+          </div>
+          <div
+            style={{
+              fontFamily: "'DM Mono', monospace",
+              fontSize: 11,
+              color: "#5A5A54",
+            }}
+          >
+            © 2025 Gaurav Kumar · Berlin, Germany
+          </div>
+          <div
+            className="footer-links"
+            style={{ display: "flex", gap: 16, flexWrap: "wrap" }}
+          >
+            {[
+              ["GitHub", "https://github.com/iamgaurav07"],
+              ["LinkedIn", "https://linkedin.com/in/iamgaurav1993"],
+              ["Email", "mailto:iamgaurav1993@gmail.com"],
+            ].map(([label, href]) => (
+              <a
+                key={label}
+                href={href}
+                target="_blank"
+                style={{
+                  fontFamily: "'DM Mono', monospace",
+                  fontSize: 11,
+                  color: "#5A5A54",
+                  transition: "color 0.2s",
+                }}
+                onMouseEnter={(e) => (e.currentTarget.style.color = "#9B9A92")}
+                onMouseLeave={(e) => (e.currentTarget.style.color = "#5A5A54")}
+              >
+                {label}
+              </a>
+            ))}
+          </div>
         </div>
       </footer>
     </div>
