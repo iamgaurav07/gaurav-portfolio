@@ -143,7 +143,7 @@ export default function Portfolio() {
 
   const experience = [
     {
-      date: "Jul 2022 — Sep 2022",
+      date: "Jan 2022 — Sep 2022",
       company: "Netsmartz",
       role: "Senior Software Engineer",
       location: "Chandigarh, India",
