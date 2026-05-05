@@ -294,7 +294,7 @@ export default function Portfolio() {
             color: "#F0EFE8",
           }}
         >
-          gaurav<span style={{ color: "#E8FF5A" }}>.</span>
+          Gaurav Kumar<span style={{ color: "#E8FF5A" }}>.</span>
         </a>
         <div style={{ display: "flex", alignItems: "center", gap: 32 }}>
           {["Projects", "Skills", "Experience", "Blog", "Contact"].map(
@@ -404,7 +404,7 @@ export default function Portfolio() {
                 animation: "pulseGreen 2s ease-in-out infinite",
               }}
             />
-            Available for full-time roles · Berlin, Germany
+            Available for full-time roles · Germany
           </div>
 
           <h1
@@ -438,7 +438,7 @@ export default function Portfolio() {
             }}
           >
             6+ years building production SaaS, AI platforms, and ML tools. Based
-            in Berlin with a valid German work permit — no sponsorship required.
+            in Germany with a valid German work permit, no sponsorship required.
           </p>
 
           <div
