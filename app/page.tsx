@@ -141,6 +141,23 @@ export default function Portfolio() {
     },
   ];
 
+  const handleDownload = async () => {
+    try {
+      const response = await fetch("/Gaurav_Kumar_CV.pdf");
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "Gaurav_Kumar_CV.pdf";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error("Download failed:", error);
+    }
+  };
+
   const experience = [
     {
       date: "Jan 2022 — Sep 2022",
@@ -298,9 +315,8 @@ export default function Portfolio() {
             ),
           )}
         </div>
-        <a
-          href="/cv.pdf"
-          download
+        <button
+          onClick={handleDownload}
           style={{
             background: "#E8FF5A",
             color: "#0D0D0B",
@@ -310,10 +326,12 @@ export default function Portfolio() {
             fontSize: 13,
             fontFamily: "'DM Sans', sans-serif",
             transition: "all 0.2s",
+            cursor: "pointer",
+            border: "none",
           }}
         >
           Download CV
-        </a>
+        </button>
       </nav>
 
       {/* HERO */}
