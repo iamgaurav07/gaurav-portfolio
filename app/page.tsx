@@ -289,12 +289,12 @@ export default function Portfolio() {
           style={{
             fontFamily: "'Syne', sans-serif",
             fontWeight: 800,
-            fontSize: 18,
+            fontSize: 22,
             letterSpacing: "-0.02em",
             color: "#F0EFE8",
           }}
         >
-          Gaurav Kumar<span style={{ color: "#E8FF5A" }}>.</span>
+          Gaurav<span style={{ color: "#E8FF5A" }}>.</span>
         </a>
         <div style={{ display: "flex", alignItems: "center", gap: 32 }}>
           {["Projects", "Skills", "Experience", "Blog", "Contact"].map(
@@ -1522,11 +1522,11 @@ export default function Portfolio() {
           style={{
             fontFamily: "'Syne', sans-serif",
             fontWeight: 800,
-            fontSize: 16,
+            fontSize: 20,
             letterSpacing: "-0.02em",
           }}
         >
-          gaurav<span style={{ color: "#E8FF5A" }}>.</span>
+          Gaurav<span style={{ color: "#E8FF5A" }}>.</span>
         </div>
         <div
           style={{
