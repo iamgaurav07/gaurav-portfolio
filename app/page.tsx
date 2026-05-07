@@ -1913,7 +1913,7 @@ export default function Portfolio() {
               color: "#5A5A54",
             }}
           >
-            © 2025 Gaurav Kumar · Berlin, Germany
+            © 2026 Gaurav Kumar · Berlin, Germany
           </div>
           <div
             className="footer-links"
