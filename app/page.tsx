@@ -46,6 +46,24 @@ export default function Portfolio() {
   const projects = [
     {
       number: "01",
+      title: "LeadLoop",
+      desc: "Production-grade multi-tenant WhatsApp & Email CRM. Features real-time messaging via WebSockets, AI-powered reply suggestions using Groq (Llama 3.3 70B), pipeline management with auto-detection from message content, Stripe billing with plan gating, and dark/light theme. Built for businesses to manage customer conversations at scale.",
+      tags: [
+        "Next.js 15",
+        "TypeScript",
+        "NestJS",
+        "PostgreSQL",
+        "WebSockets",
+        "Groq AI",
+        "Stripe",
+        "WhatsApp API",
+        "Railway",
+      ],
+      live: "https://leadloop-frontend-production.up.railway.app",
+      github: "https://github.com/iamgaurav07/leadloop",
+    },
+    {
+      number: "02",
       title: "CodeLens",
       desc: "Production-grade multi-tenant AI code review SaaS. Connects to GitHub via a GitHub App, reviews every PR within 30 seconds using GPT-4o, posts structured feedback with severity scores, and streams results to a real-time dashboard via SSE.",
       tags: [
@@ -62,7 +80,7 @@ export default function Portfolio() {
       github: "https://github.com/iamgaurav07/codelens",
     },
     {
-      number: "02",
+      number: "03",
       title: "AgentFlow",
       desc: "Full-stack AI agent SaaS platform. Users create custom agents with system prompts, tools, and private knowledge bases. RAG pipeline using pgvector for semantic search over uploaded documents. Agents stream responses token-by-token via SSE.",
       tags: [
@@ -79,7 +97,7 @@ export default function Portfolio() {
       github: "https://github.com/iamgaurav07/agent-platform",
     },
     {
-      number: "03",
+      number: "04",
       title: "PulseVC",
       desc: "ML-powered VC portfolio analysis platform. Investors upload CSV data and receive 6-month forecasting via Prophet, anomaly detection via Isolation Forest, KMeans clustering, and natural language Q&A over their portfolio companies.",
       tags: [
