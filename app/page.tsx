@@ -1,7 +1,93 @@
 "use client";
 import { useState, useEffect } from "react";
 
+const translations = {
+  en: {
+    available: "Available for full-time roles · Germany",
+    heroTitle1: "Full Stack",
+    heroTitle2: "Engineer &",
+    heroTitle3: "AI Builder.",
+    heroSubtitle:
+      "6+ years building production SaaS, AI platforms, and ML tools. Based in Germany with a valid German work permit, no sponsorship required.",
+    viewWork: "View my work",
+    getInTouch: "Get in touch",
+    yearsExp: "Years experience",
+    liveProducts: "Live AI products",
+    workPermit: "Work permit ✓",
+    selectedWork: "Selected Work",
+    projects: "Projects",
+    whatIWorkWith: "What I work with",
+    skills: "Skills",
+    whereWorked: "Where I've worked",
+    experience: "Experience",
+    education: "Education",
+    writing: "Writing",
+    blog: "Blog",
+    letsWork: "Let's work together",
+    contact: "Contact",
+    contactDesc:
+      "I'm actively looking for full-time opportunities in Berlin. Valid German work permit — no sponsorship required. Open to senior full stack, AI engineering, or lead roles.",
+    name: "Name",
+    email: "Email",
+    message: "Message",
+    messagePlaceholder: "Tell me about the role...",
+    send: "Send message →",
+    sending: "Sending...",
+    sent: "Message sent!",
+    liveDemo: "Live Demo",
+    downloadCV: "Download CV",
+    comingSoon: "Coming soon",
+    live: "Live",
+    nav: ["Projects", "Skills", "Experience", "Blog", "Contact"],
+    navHrefs: ["projects", "skills", "experience", "blog", "contact"],
+    profile:
+      "Full Stack Engineer with 6+ years of experience delivering scalable SaaS, Fintech, and AI-powered platforms. Production expertise in TypeScript, React, Node.js, and Python. Independently shipped four live AI products covering WhatsApp CRM with real-time messaging, RAG pipelines, GitHub App integrations, and ML analytics. Based in Berlin with a valid German work permit.",
+  },
+  de: {
+    available: "Verfügbar für Vollzeitstellen · Deutschland",
+    heroTitle1: "Full Stack",
+    heroTitle2: "Entwickler &",
+    heroTitle3: "KI-Entwickler.",
+    heroSubtitle:
+      "6+ Jahre Erfahrung in der Entwicklung von SaaS-, KI- und ML-Plattformen. Wohnhaft in Deutschland mit gültiger Arbeitserlaubnis, kein Sponsoring erforderlich.",
+    viewWork: "Meine Arbeit ansehen",
+    getInTouch: "Kontakt aufnehmen",
+    yearsExp: "Jahre Erfahrung",
+    liveProducts: "Live KI-Produkte",
+    workPermit: "Arbeitserlaubnis ✓",
+    selectedWork: "Ausgewählte Arbeiten",
+    projects: "Projekte",
+    whatIWorkWith: "Womit ich arbeite",
+    skills: "Kenntnisse",
+    whereWorked: "Wo ich gearbeitet habe",
+    experience: "Berufserfahrung",
+    education: "Ausbildung",
+    writing: "Schreiben",
+    blog: "Blog",
+    letsWork: "Lass uns zusammenarbeiten",
+    contact: "Kontakt",
+    contactDesc:
+      "Ich suche aktiv nach Vollzeitstellen in Berlin. Gültige deutsche Arbeitserlaubnis — kein Sponsoring erforderlich. Offen für Senior Full Stack, KI-Engineering oder Lead-Rollen.",
+    name: "Name",
+    email: "E-Mail",
+    message: "Nachricht",
+    messagePlaceholder: "Erzähl mir von der Stelle...",
+    send: "Nachricht senden →",
+    sending: "Wird gesendet...",
+    sent: "Nachricht gesendet!",
+    liveDemo: "Live Demo",
+    downloadCV: "Lebenslauf herunterladen",
+    comingSoon: "Demnächst",
+    live: "Live",
+    nav: ["Projekte", "Kenntnisse", "Erfahrung", "Blog", "Kontakt"],
+    navHrefs: ["projects", "skills", "experience", "blog", "contact"],
+    profile:
+      "Full-Stack-Entwickler mit 6+ Jahren Erfahrung in skalierbaren SaaS-, Fintech- und KI-Plattformen. Produktive Expertise in TypeScript, React, Node.js und Python. Vier Live-KI-Produkte eigenständig entwickelt und deployt — von WhatsApp-CRM mit Echtzeit-Messaging über RAG-Pipelines bis hin zu ML-Analysen. Wohnhaft in Berlin mit gültiger Arbeitserlaubnis.",
+  },
+};
+
 export default function Portfolio() {
+  const [lang, setLang] = useState<"en" | "de">("en");
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -12,15 +98,15 @@ export default function Portfolio() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
+  const t = translations[lang];
+
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const handleNavClick = () => {
-    setMobileMenuOpen(false);
-  };
+  const handleNavClick = () => setMobileMenuOpen(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -47,7 +133,10 @@ export default function Portfolio() {
     {
       number: "01",
       title: "LeadLoop",
-      desc: "Production-grade multi-tenant WhatsApp & Email CRM. Features real-time messaging via WebSockets, AI-powered reply suggestions using Groq (Llama 3.3 70B), pipeline management with auto-detection from message content, Stripe billing with plan gating, and dark/light theme. Built for businesses to manage customer conversations at scale.",
+      desc: {
+        en: "Production-grade multi-tenant WhatsApp & Email CRM. Features real-time messaging via WebSockets, AI-powered reply suggestions using Groq (Llama 3.3 70B), pipeline management with auto-detection from message content, Stripe billing with plan gating, and dark/light theme. Built for businesses to manage customer conversations at scale.",
+        de: "Produktionsreifes Multi-Tenant WhatsApp- und E-Mail-CRM. Echtzeit-Messaging via WebSockets, KI-gestützte Antwortvorschläge mit Groq (Llama 3.3 70B), Pipeline-Management mit Auto-Erkennung, Stripe-Billing mit Plan-Gating und Dark/Light-Theme.",
+      },
       tags: [
         "Next.js 15",
         "TypeScript",
@@ -65,7 +154,10 @@ export default function Portfolio() {
     {
       number: "02",
       title: "CodeLens",
-      desc: "Production-grade multi-tenant AI code review SaaS. Connects to GitHub via a GitHub App, reviews every PR within 30 seconds using GPT-4o, posts structured feedback with severity scores, and streams results to a real-time dashboard via SSE.",
+      desc: {
+        en: "Production-grade multi-tenant AI code review SaaS. Connects to GitHub via a GitHub App, reviews every PR within 30 seconds using GPT-4o, posts structured feedback with severity scores, and streams results to a real-time dashboard via SSE.",
+        de: "Produktionsreifes Multi-Tenant KI-Code-Review-SaaS. Verbindet sich mit GitHub via GitHub App, bewertet jeden PR innerhalb von 30 Sekunden mit GPT-4o und streamt Ergebnisse in ein Echtzeit-Dashboard via SSE.",
+      },
       tags: [
         "Next.js 15",
         "TypeScript",
@@ -82,7 +174,10 @@ export default function Portfolio() {
     {
       number: "03",
       title: "AgentFlow",
-      desc: "Full-stack AI agent SaaS platform. Users create custom agents with system prompts, tools, and private knowledge bases. RAG pipeline using pgvector for semantic search over uploaded documents. Agents stream responses token-by-token via SSE.",
+      desc: {
+        en: "Full-stack AI agent SaaS platform. Users create custom agents with system prompts, tools, and private knowledge bases. RAG pipeline using pgvector for semantic search over uploaded documents. Agents stream responses token-by-token via SSE.",
+        de: "Full-Stack KI-Agent-SaaS-Plattform. Nutzer erstellen Agenten mit System-Prompts, Tools und privaten Wissensdatenbanken. RAG-Pipeline mit pgvector für semantische Suche. Agenten streamen Antworten token-by-token via SSE.",
+      },
       tags: [
         "Next.js 15",
         "TypeScript",
@@ -99,7 +194,10 @@ export default function Portfolio() {
     {
       number: "04",
       title: "PulseVC",
-      desc: "ML-powered VC portfolio analysis platform. Investors upload CSV data and receive 6-month forecasting via Prophet, anomaly detection via Isolation Forest, KMeans clustering, and natural language Q&A over their portfolio companies.",
+      desc: {
+        en: "ML-powered VC portfolio analysis platform. Investors upload CSV data and receive 6-month forecasting via Prophet, anomaly detection via Isolation Forest, KMeans clustering, and natural language Q&A over their portfolio companies.",
+        de: "ML-gestützte VC-Portfolio-Analyseplattform. Investoren laden CSV-Daten hoch und erhalten 6-Monats-Prognosen via Prophet, Anomalieerkennung via Isolation Forest, KMeans-Clustering und Natural-Language-Q&A.",
+      },
       tags: [
         "FastAPI",
         "Python",
@@ -117,15 +215,15 @@ export default function Portfolio() {
 
   const skills = [
     {
-      label: "Languages",
+      label: { en: "Languages", de: "Sprachen" },
       items: ["TypeScript", "JavaScript", "Python", "SQL", "PHP"],
     },
     {
-      label: "Frontend",
+      label: { en: "Frontend", de: "Frontend" },
       items: ["React", "Next.js 15", "Angular", "Redux", "TailwindCSS", "tRPC"],
     },
     {
-      label: "Backend",
+      label: { en: "Backend", de: "Backend" },
       items: [
         "Node.js",
         "NestJS",
@@ -136,7 +234,7 @@ export default function Portfolio() {
       ],
     },
     {
-      label: "Databases",
+      label: { en: "Databases", de: "Datenbanken" },
       items: [
         "PostgreSQL",
         "pgvector",
@@ -147,9 +245,10 @@ export default function Portfolio() {
       ],
     },
     {
-      label: "AI & ML",
+      label: { en: "AI & ML", de: "KI & ML" },
       items: [
         "OpenAI API",
+        "Groq AI",
         "RAG Pipelines",
         "Vector Search",
         "Prophet",
@@ -158,7 +257,7 @@ export default function Portfolio() {
       ],
     },
     {
-      label: "Cloud & DevOps",
+      label: { en: "Cloud & DevOps", de: "Cloud & DevOps" },
       items: [
         "AWS (EC2/ECS/Lambda)",
         "Docker",
@@ -167,6 +266,137 @@ export default function Portfolio() {
         "Railway",
         "Render",
       ],
+    },
+  ];
+
+  const experience = [
+    {
+      date: "Jan 2022 — Sep 2022",
+      company: "Netsmartz",
+      role: { en: "Senior Software Engineer", de: "Senior Software Engineer" },
+      location: "Chandigarh, India",
+      bullets: {
+        en: [
+          "Designed REST APIs with Node.js, Express, MongoDB, and Redis for high-traffic applications",
+          "Architected GitHub Actions CI/CD pipelines and Docker containerisation",
+          "Optimised AWS infrastructure (EC2, ECS, Lambda) for cost and performance",
+        ],
+        de: [
+          "Entwarf REST APIs mit Node.js, Express, MongoDB und Redis für hochfrequentierte Anwendungen",
+          "Konzipierte GitHub Actions CI/CD-Pipelines und Docker-Containerisierung",
+          "Optimierte AWS-Infrastruktur (EC2, ECS, Lambda) für Kosteneffizienz und Performance",
+        ],
+      },
+    },
+    {
+      date: "Jun 2020 — Jan 2022",
+      company: "SmartData Enterprises",
+      role: {
+        en: "Senior Associate — Software Engineer",
+        de: "Senior Associate — Software Engineer",
+      },
+      location: "Mohali, India",
+      bullets: {
+        en: [
+          "Led Node.js microservices development across multiple enterprise SaaS products",
+          "Built React/TypeScript frontends with Redux for complex state management",
+          "Managed AWS infrastructure; configured GitLab CI/CD for zero-downtime deployments",
+        ],
+        de: [
+          "Leitete Node.js-Microservices-Entwicklung für mehrere Enterprise-SaaS-Produkte",
+          "Baute React/TypeScript-Frontends mit Redux für komplexes State-Management",
+          "Verwaltete AWS-Infrastruktur; konfigurierte GitLab CI/CD für Zero-Downtime-Deployments",
+        ],
+      },
+    },
+    {
+      date: "Mar 2018 — Jun 2020",
+      company: "VenturePact",
+      role: { en: "Software Developer", de: "Software-Entwickler" },
+      location: "Jalandhar, India",
+      bullets: {
+        en: [
+          "Developed full-stack B2B SaaS features with Angular, Node.js, and Express",
+          "Integrated HubSpot, Salesforce, and Marketo via REST APIs for CRM synchronisation",
+        ],
+        de: [
+          "Entwickelte Full-Stack B2B-SaaS-Features mit Angular, Node.js und Express",
+          "Integrierte HubSpot, Salesforce und Marketo via REST APIs für CRM-Synchronisierung",
+        ],
+      },
+    },
+    {
+      date: "Jan 2017 — Feb 2018",
+      company: "Nascenture",
+      role: { en: "Software Developer", de: "Software-Entwickler" },
+      location: "Mohali, India",
+      bullets: {
+        en: [
+          "Delivered full-stack client solutions using PHP, MySQL, JavaScript, and MongoDB",
+          "Designed and optimised relational and NoSQL schemas for multiple projects",
+        ],
+        de: [
+          "Lieferte Full-Stack-Lösungen mit PHP, MySQL, JavaScript und MongoDB",
+          "Entwarf und optimierte relationale und NoSQL-Datenbankschemata",
+        ],
+      },
+    },
+  ];
+
+  const education = [
+    {
+      degree: {
+        en: "MSc Information Technology Management",
+        de: "MSc Informationstechnologiemanagement",
+      },
+      school: "Berlin School of Business and Innovation",
+      date: "Feb 2024 — Mar 2026",
+      location: "Berlin, Germany",
+    },
+    {
+      degree: {
+        en: "B.Tech Computer Science and Engineering",
+        de: "B.Tech Informatik und Ingenieurwesen",
+      },
+      school: "Beant College of Engineering and Technology",
+      date: "Jul 2011 — May 2015",
+      location: "India",
+    },
+  ];
+
+  const blogs = [
+    {
+      tag: { en: "Architecture", de: "Architektur" },
+      title: {
+        en: "Building a Multi-Tenant SaaS with Next.js 15 and Drizzle ORM",
+        de: "Multi-Tenant SaaS mit Next.js 15 und Drizzle ORM entwickeln",
+      },
+      excerpt: {
+        en: "How I designed the database schema and auth flow for CodeLens to support multiple users with full data isolation.",
+        de: "Wie ich das Datenbankschema und den Auth-Flow für CodeLens entwickelt habe, um mehrere Nutzer mit vollständiger Datenisolierung zu unterstützen.",
+      },
+    },
+    {
+      tag: { en: "AI Engineering", de: "KI-Engineering" },
+      title: {
+        en: "Real-Time AI Reviews: SSE vs WebSockets for Streaming Data",
+        de: "Echtzeit-KI-Reviews: SSE vs WebSockets für Streaming-Daten",
+      },
+      excerpt: {
+        en: "Why I chose Server-Sent Events over WebSockets for CodeLens and how to implement persistent connections in Next.js.",
+        de: "Warum ich Server-Sent Events statt WebSockets für CodeLens gewählt habe und wie man persistente Verbindungen in Next.js implementiert.",
+      },
+    },
+    {
+      tag: { en: "ML", de: "ML" },
+      title: {
+        en: "From CSV to Forecast: Building a VC Analytics Engine with Prophet",
+        de: "Von CSV zur Prognose: Eine VC-Analytics-Engine mit Prophet entwickeln",
+      },
+      excerpt: {
+        en: "A deep dive into building PulseVC — time series forecasting, anomaly detection, and clustering on financial data.",
+        de: "Ein tiefer Einblick in die Entwicklung von PulseVC — Zeitreihenprognosen, Anomalieerkennung und Clustering auf Finanzdaten.",
+      },
     },
   ];
 
@@ -187,76 +417,6 @@ export default function Portfolio() {
     }
   };
 
-  const experience = [
-    {
-      date: "Jan 2022 — Sep 2022",
-      company: "Netsmartz",
-      role: "Senior Software Engineer",
-      location: "Chandigarh, India",
-      bullets: [
-        "Designed REST APIs with Node.js, Express, MongoDB, and Redis for high-traffic applications",
-        "Architected GitHub Actions CI/CD pipelines and Docker containerisation",
-        "Optimised AWS infrastructure (EC2, ECS, Lambda) for cost and performance",
-      ],
-    },
-    {
-      date: "Jun 2020 — Jan 2022",
-      company: "SmartData Enterprises",
-      role: "Senior Associate — Software Engineer",
-      location: "Mohali, India",
-      bullets: [
-        "Led Node.js microservices development across multiple enterprise SaaS products",
-        "Built React/TypeScript frontends with Redux for complex state management",
-        "Managed AWS infrastructure; configured GitLab CI/CD for zero-downtime deployments",
-      ],
-    },
-    {
-      date: "Mar 2018 — Jun 2020",
-      company: "VenturePact",
-      role: "Software Developer",
-      location: "Jalandhar, India",
-      bullets: [
-        "Developed full-stack B2B SaaS features with Angular, Node.js, and Express",
-        "Integrated HubSpot, Salesforce, and Marketo via REST APIs for CRM synchronisation",
-      ],
-    },
-    {
-      date: "Jan 2017 — Feb 2018",
-      company: "Nascenture",
-      role: "Software Developer",
-      location: "Mohali, India",
-      bullets: [
-        "Delivered full-stack client solutions using PHP, MySQL, JavaScript, and MongoDB",
-        "Designed and optimised relational and NoSQL schemas for multiple projects",
-      ],
-    },
-  ];
-
-  const blogs = [
-    {
-      tag: "Architecture",
-      title: "Building a Multi-Tenant SaaS with Next.js 15 and Drizzle ORM",
-      excerpt:
-        "How I designed the database schema and auth flow for CodeLens to support multiple users with full data isolation.",
-      date: "Coming soon",
-    },
-    {
-      tag: "AI Engineering",
-      title: "Real-Time AI Reviews: SSE vs WebSockets for Streaming Data",
-      excerpt:
-        "Why I chose Server-Sent Events over WebSockets for CodeLens and how to implement persistent connections in Next.js.",
-      date: "Coming soon",
-    },
-    {
-      tag: "ML",
-      title:
-        "From CSV to Forecast: Building a VC Analytics Engine with Prophet",
-      excerpt:
-        "A deep dive into building PulseVC — time series forecasting, anomaly detection, and clustering on financial data.",
-      date: "Coming soon",
-    },
-  ];
-
   return (
     <div
       style={{
@@ -269,259 +429,71 @@ export default function Portfolio() {
     >
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500;600&display=swap');
-        
-        * {
-          box-sizing: border-box;
-          margin: 0;
-          padding: 0;
-        }
-        
-        html {
-          scroll-behavior: smooth;
-        }
-        
-        ::-webkit-scrollbar {
-          width: 3px;
-        }
-        
-        ::-webkit-scrollbar-track {
-          background: #0D0D0B;
-        }
-        
-        ::-webkit-scrollbar-thumb {
-          background: #2A2A26;
-          border-radius: 2px;
-        }
-        
-        a {
-          text-decoration: none;
-          color: inherit;
-        }
-        
-        @keyframes fadeUp {
-          from {
-            opacity: 0;
-            transform: translateY(16px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-        
-        @keyframes pulseGreen {
-          0%, 100% {
-            opacity: 1;
-          }
-          50% {
-            opacity: 0.4;
-          }
-        }
-        
-        @keyframes spin {
-          to {
-            transform: rotate(360deg);
-          }
-        }
-        
-        .fade1 {
-          animation: fadeUp 0.6s ease 0.1s both;
-        }
-        .fade2 {
-          animation: fadeUp 0.6s ease 0.2s both;
-        }
-        .fade3 {
-          animation: fadeUp 0.6s ease 0.3s both;
-        }
-        .fade4 {
-          animation: fadeUp 0.6s ease 0.4s both;
-        }
-        .fade5 {
-          animation: fadeUp 0.6s ease 0.5s both;
-        }
-        
-        .project-card {
-          transition: all 0.2s;
-        }
-        .project-card:hover {
-          transform: translateY(-2px);
-          border-color: #3A3A36 !important;
-        }
-        
-        .blog-card {
-          transition: all 0.2s;
-        }
-        .blog-card:hover {
-          transform: translateY(-2px);
-          border-color: #3A3A36 !important;
-        }
-        
-        .contact-link {
-          transition: all 0.2s;
-        }
-        .contact-link:hover {
-          transform: translateX(4px);
-          border-color: #3A3A36 !important;
-          color: #F0EFE8 !important;
-        }
-        
-        .skill-item {
-          transition: all 0.15s;
-          cursor: default;
-        }
-        .skill-item:hover {
-          color: #F0EFE8 !important;
-          border-color: #3A3A36 !important;
-        }
-        
-        .nav-link-item {
-          transition: color 0.2s;
-        }
-        .nav-link-item:hover {
-          color: #F0EFE8 !important;
-        }
-        
-        /* Mobile menu overlay */
-        .mobile-menu {
-          position: fixed;
-          top: 64px;
-          left: 0;
-          right: 0;
-          background: rgba(13, 13, 11, 0.98);
-          backdrop-filter: blur(20px);
-          border-bottom: 1px solid #1C1C19;
-          padding: 20px;
-          z-index: 99;
-          transform: translateY(-100%);
-          opacity: 0;
-          transition: all 0.3s ease;
-          pointer-events: none;
-        }
-        
-        .mobile-menu.open {
-          transform: translateY(0);
-          opacity: 1;
-          pointer-events: all;
-        }
-        
-        /* Desktop styles */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        ::-webkit-scrollbar { width: 3px; }
+        ::-webkit-scrollbar-track { background: #0D0D0B; }
+        ::-webkit-scrollbar-thumb { background: #2A2A26; border-radius: 2px; }
+        a { text-decoration: none; color: inherit; }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes pulseGreen { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .fade1 { animation: fadeUp 0.6s ease 0.1s both; }
+        .fade2 { animation: fadeUp 0.6s ease 0.2s both; }
+        .fade3 { animation: fadeUp 0.6s ease 0.3s both; }
+        .fade4 { animation: fadeUp 0.6s ease 0.4s both; }
+        .fade5 { animation: fadeUp 0.6s ease 0.5s both; }
+        .project-card { transition: all 0.2s; }
+        .project-card:hover { transform: translateY(-2px); border-color: #3A3A36 !important; }
+        .blog-card { transition: all 0.2s; }
+        .blog-card:hover { transform: translateY(-2px); border-color: #3A3A36 !important; }
+        .contact-link { transition: all 0.2s; }
+        .contact-link:hover { transform: translateX(4px); border-color: #3A3A36 !important; color: #F0EFE8 !important; }
+        .skill-item { transition: all 0.15s; cursor: default; }
+        .skill-item:hover { color: #F0EFE8 !important; border-color: #3A3A36 !important; }
+        .nav-link-item { transition: color 0.2s; }
+        .nav-link-item:hover { color: #F0EFE8 !important; }
+        .lang-btn { transition: all 0.2s; cursor: pointer; }
+        .lang-btn:hover { color: #F0EFE8 !important; }
+        .mobile-menu { position: fixed; top: 64px; left: 0; right: 0; background: rgba(13,13,11,0.98); backdrop-filter: blur(20px); border-bottom: 1px solid #1C1C19; padding: 20px; z-index: 99; transform: translateY(-100%); opacity: 0; transition: all 0.3s ease; pointer-events: none; }
+        .mobile-menu.open { transform: translateY(0); opacity: 1; pointer-events: all; }
         @media (min-width: 769px) {
-          .mobile-nav-toggle {
-            display: none !important;
-          }
-          .mobile-menu {
-            display: none !important;
-          }
-          .project-grid-item {
-            padding: 36px !important;
-          }
-          .contact-form {
-            padding: 32px !important;
-          }
-          section {
-            padding-left: 48px !important;
-            padding-right: 48px !important;
-          }
-          .education-card {
-            padding: 24px 28px !important;
-          }
-          .skills-card {
-            padding: 28px 32px !important;
-          }
-          .blog-card {
-            padding: 28px !important;
-          }
-          .hero-section {
-            padding: 140px 48px 100px !important;
-          }
+          .mobile-nav-toggle { display: none !important; }
+          .mobile-menu { display: none !important; }
+          .project-grid-item { padding: 36px !important; }
+          .contact-form { padding: 32px !important; }
+          section { padding-left: 48px !important; padding-right: 48px !important; }
+          .education-card { padding: 24px 28px !important; }
+          .skills-card { padding: 28px 32px !important; }
+          .blog-card { padding: 28px !important; }
+          .hero-section { padding: 140px 48px 100px !important; }
         }
-        
-        /* Mobile styles */
         @media (max-width: 768px) {
-          .desktop-nav {
-            display: none !important;
-          }
-          .mobile-nav-toggle {
-            display: flex !important;
-          }
-          .hero-stats {
-            flex-direction: column !important;
-            align-items: flex-start !important;
-            gap: 20px !important;
-          }
-          .stats-divider {
-            display: none !important;
-          }
-          .project-grid-item {
-            grid-template-columns: 1fr !important;
-            padding: 24px !important;
-          }
-          .skills-grid {
-            grid-template-columns: 1fr !important;
-          }
-          .experience-grid {
-            grid-template-columns: 1fr !important;
-            gap: 16px !important;
-          }
-          .experience-date {
-            margin-bottom: 8px !important;
-          }
-          .education-grid {
-            grid-template-columns: 1fr !important;
-          }
-          .blog-grid {
-            grid-template-columns: 1fr !important;
-          }
-          .contact-grid {
-            grid-template-columns: 1fr !important;
-            gap: 32px !important;
-          }
-          .footer-content {
-            flex-direction: column !important;
-            gap: 16px !important;
-            text-align: center !important;
-          }
-          .hero-buttons {
-            flex-direction: column !important;
-            width: 100% !important;
-          }
-          .hero-buttons a, .hero-buttons button {
-            width: 100% !important;
-            justify-content: center !important;
-          }
-          .project-buttons {
-            flex-direction: column !important;
-          }
-          .project-buttons a {
-            width: 100% !important;
-            justify-content: center !important;
-          }
+          .desktop-nav { display: none !important; }
+          .mobile-nav-toggle { display: flex !important; }
+          .hero-stats { flex-direction: column !important; align-items: flex-start !important; gap: 20px !important; }
+          .stats-divider { display: none !important; }
+          .project-grid-item { grid-template-columns: 1fr !important; padding: 24px !important; }
+          .skills-grid { grid-template-columns: 1fr !important; }
+          .experience-grid { grid-template-columns: 1fr !important; gap: 16px !important; }
+          .experience-date { margin-bottom: 8px !important; }
+          .education-grid { grid-template-columns: 1fr !important; }
+          .blog-grid { grid-template-columns: 1fr !important; }
+          .contact-grid { grid-template-columns: 1fr !important; gap: 32px !important; }
+          .footer-content { flex-direction: column !important; gap: 16px !important; text-align: center !important; }
+          .hero-buttons { flex-direction: column !important; width: 100% !important; }
+          .hero-buttons a, .hero-buttons button { width: 100% !important; justify-content: center !important; }
+          .project-buttons { flex-direction: column !important; }
+          .project-buttons a { width: 100% !important; justify-content: center !important; }
         }
-        
         @media (max-width: 480px) {
-          .nav-logo {
-            font-size: 18px !important;
-          }
-          .hero-title {
-            font-size: 42px !important;
-          }
-          .hero-subtitle {
-            font-size: 14px !important;
-          }
-          .section-title {
-            font-size: 32px !important;
-          }
-          .project-title {
-            font-size: 24px !important;
-          }
-          .skill-item {
-            font-size: 11px !important;
-            padding: 4px 10px !important;
-          }
-          .footer-links {
-            flex-wrap: wrap !important;
-            justify-content: center !important;
-          }
+          .nav-logo { font-size: 18px !important; }
+          .hero-title { font-size: 42px !important; }
+          .hero-subtitle { font-size: 14px !important; }
+          .section-title { font-size: 32px !important; }
+          .project-title { font-size: 24px !important; }
+          .skill-item { font-size: 11px !important; padding: 4px 10px !important; }
+          .footer-links { flex-wrap: wrap !important; justify-content: center !important; }
         }
       `}</style>
 
@@ -562,43 +534,78 @@ export default function Portfolio() {
           className="desktop-nav"
           style={{ display: "flex", alignItems: "center", gap: 32 }}
         >
-          {["Projects", "Skills", "Experience", "Blog", "Contact"].map(
-            (link) => (
-              <a
-                key={link}
-                href={`#${link.toLowerCase()}`}
-                className="nav-link-item"
-                style={{
-                  fontSize: 13,
-                  fontWeight: 500,
-                  color: "#9B9A92",
-                  fontFamily: "'DM Sans', sans-serif",
-                }}
-              >
-                {link}
-              </a>
-            ),
-          )}
+          {t.nav.map((link, i) => (
+            <a
+              key={link}
+              href={`#${t.navHrefs[i]}`}
+              className="nav-link-item"
+              style={{
+                fontSize: 13,
+                fontWeight: 500,
+                color: "#9B9A92",
+                fontFamily: "'DM Sans', sans-serif",
+              }}
+            >
+              {link}
+            </a>
+          ))}
         </div>
 
-        <button
-          onClick={handleDownload}
-          className="desktop-nav"
-          style={{
-            background: "#E8FF5A",
-            color: "#0D0D0B",
-            padding: "8px 20px",
-            borderRadius: 100,
-            fontWeight: 700,
-            fontSize: 13,
-            fontFamily: "'DM Sans', sans-serif",
-            transition: "all 0.2s",
-            cursor: "pointer",
-            border: "none",
-          }}
-        >
-          Download CV
-        </button>
+        <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+          {/* Language toggle */}
+          <div
+            className="desktop-nav"
+            style={{
+              display: "flex",
+              alignItems: "center",
+              background: "#1C1C19",
+              border: "1px solid #2A2A26",
+              borderRadius: 100,
+              padding: "3px",
+            }}
+          >
+            {(["en", "de"] as const).map((l) => (
+              <button
+                key={l}
+                onClick={() => setLang(l)}
+                className="lang-btn"
+                style={{
+                  background: lang === l ? "#E8FF5A" : "transparent",
+                  color: lang === l ? "#0D0D0B" : "#9B9A92",
+                  border: "none",
+                  borderRadius: 100,
+                  padding: "5px 12px",
+                  fontSize: 11,
+                  fontWeight: 700,
+                  fontFamily: "'DM Mono', monospace",
+                  letterSpacing: "0.04em",
+                  textTransform: "uppercase",
+                }}
+              >
+                {l}
+              </button>
+            ))}
+          </div>
+
+          <button
+            onClick={handleDownload}
+            className="desktop-nav"
+            style={{
+              background: "#E8FF5A",
+              color: "#0D0D0B",
+              padding: "8px 20px",
+              borderRadius: 100,
+              fontWeight: 700,
+              fontSize: 13,
+              fontFamily: "'DM Sans', sans-serif",
+              transition: "all 0.2s",
+              cursor: "pointer",
+              border: "none",
+            }}
+          >
+            {t.downloadCV}
+          </button>
+        </div>
 
         <button
           className="mobile-nav-toggle"
@@ -648,26 +655,57 @@ export default function Portfolio() {
             alignItems: "center",
           }}
         >
-          {["Projects", "Skills", "Experience", "Blog", "Contact"].map(
-            (link) => (
-              <a
-                key={link}
-                href={`#${link.toLowerCase()}`}
-                onClick={handleNavClick}
+          {/* Mobile language toggle */}
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              background: "#1C1C19",
+              border: "1px solid #2A2A26",
+              borderRadius: 100,
+              padding: "3px",
+            }}
+          >
+            {(["en", "de"] as const).map((l) => (
+              <button
+                key={l}
+                onClick={() => setLang(l)}
                 style={{
-                  fontSize: 16,
-                  fontWeight: 500,
-                  color: "#9B9A92",
-                  fontFamily: "'DM Sans', sans-serif",
-                  padding: "8px 0",
-                  width: "100%",
-                  textAlign: "center",
+                  background: lang === l ? "#E8FF5A" : "transparent",
+                  color: lang === l ? "#0D0D0B" : "#9B9A92",
+                  border: "none",
+                  borderRadius: 100,
+                  padding: "5px 16px",
+                  fontSize: 11,
+                  fontWeight: 700,
+                  fontFamily: "'DM Mono', monospace",
+                  letterSpacing: "0.04em",
+                  textTransform: "uppercase" as const,
+                  cursor: "pointer",
                 }}
               >
-                {link}
-              </a>
-            ),
-          )}
+                {l}
+              </button>
+            ))}
+          </div>
+          {t.nav.map((link, i) => (
+            <a
+              key={link}
+              href={`#${t.navHrefs[i]}`}
+              onClick={handleNavClick}
+              style={{
+                fontSize: 16,
+                fontWeight: 500,
+                color: "#9B9A92",
+                fontFamily: "'DM Sans', sans-serif",
+                padding: "8px 0",
+                width: "100%",
+                textAlign: "center" as const,
+              }}
+            >
+              {link}
+            </a>
+          ))}
           <button
             onClick={() => {
               handleDownload();
@@ -687,7 +725,7 @@ export default function Portfolio() {
               width: "100%",
             }}
           >
-            Download CV
+            {t.downloadCV}
           </button>
         </div>
       </div>
@@ -763,7 +801,7 @@ export default function Portfolio() {
                 animation: "pulseGreen 2s ease-in-out infinite",
               }}
             />
-            Available for full-time roles · Germany
+            {t.available}
           </div>
 
           <h1
@@ -777,11 +815,11 @@ export default function Portfolio() {
               marginBottom: 32,
             }}
           >
-            Full Stack
+            {t.heroTitle1}
             <br />
-            <span style={{ color: "#6B6B64" }}>Engineer &</span>
+            <span style={{ color: "#6B6B64" }}>{t.heroTitle2}</span>
             <br />
-            <span style={{ color: "#E8FF5A" }}>AI Builder.</span>
+            <span style={{ color: "#E8FF5A" }}>{t.heroTitle3}</span>
           </h1>
 
           <p
@@ -796,8 +834,7 @@ export default function Portfolio() {
               fontWeight: 300,
             }}
           >
-            6+ years building production SaaS, AI platforms, and ML tools. Based
-            in Germany with a valid German work permit, no sponsorship required.
+            {t.heroSubtitle}
           </p>
 
           <div
@@ -825,7 +862,7 @@ export default function Portfolio() {
                 transition: "all 0.2s",
               }}
             >
-              View my work
+              {t.viewWork}
               <svg
                 width="14"
                 height="14"
@@ -856,7 +893,7 @@ export default function Portfolio() {
                 transition: "all 0.2s",
               }}
             >
-              Get in touch
+              {t.getInTouch}
             </a>
             <a
               href="https://github.com/iamgaurav07"
@@ -895,9 +932,9 @@ export default function Portfolio() {
             }}
           >
             {[
-              ["6+", "Years experience"],
-              ["3", "Live AI products"],
-              ["Berlin", "Work permit ✓"],
+              ["6+", t.yearsExp],
+              ["4", t.liveProducts],
+              ["Berlin", t.workPermit],
             ].map(([n, l], i) => (
               <div
                 key={n}
@@ -964,7 +1001,7 @@ export default function Portfolio() {
             }}
           >
             <div style={{ width: 20, height: 1, background: "#E8FF5A" }} />
-            Selected Work
+            {t.selectedWork}
           </div>
           <h2
             className="section-title"
@@ -976,9 +1013,8 @@ export default function Portfolio() {
               marginBottom: 48,
             }}
           >
-            Projects
+            {t.projects}
           </h2>
-
           <div style={{ display: "flex", flexDirection: "column", gap: 2 }}>
             {projects.map((p) => (
               <div
@@ -1029,7 +1065,7 @@ export default function Portfolio() {
                       fontWeight: 300,
                     }}
                   >
-                    {p.desc}
+                    {p.desc[lang]}
                   </p>
                   <div
                     style={{
@@ -1090,7 +1126,7 @@ export default function Portfolio() {
                         <line x1="2" y1="12" x2="22" y2="12" />
                         <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
                       </svg>
-                      Live Demo
+                      {t.liveDemo}
                     </a>
                     <a
                       href={p.github}
@@ -1133,7 +1169,7 @@ export default function Portfolio() {
                     fontSize: 10,
                     padding: "6px 12px",
                     borderRadius: 100,
-                    whiteSpace: "nowrap",
+                    whiteSpace: "nowrap" as const,
                   }}
                 >
                   <span
@@ -1146,7 +1182,7 @@ export default function Portfolio() {
                       animation: "pulseGreen 2s ease-in-out infinite",
                     }}
                   />
-                  Live
+                  {t.live}
                 </div>
               </div>
             ))}
@@ -1155,12 +1191,7 @@ export default function Portfolio() {
       </section>
 
       {/* SKILLS */}
-      <section
-        id="skills"
-        style={{
-          padding: "80px 20px",
-        }}
-      >
+      <section id="skills" style={{ padding: "80px 20px" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <div
             style={{
@@ -1176,7 +1207,7 @@ export default function Portfolio() {
             }}
           >
             <div style={{ width: 20, height: 1, background: "#E8FF5A" }} />
-            What I work with
+            {t.whatIWorkWith}
           </div>
           <h2
             className="section-title"
@@ -1188,9 +1219,8 @@ export default function Portfolio() {
               marginBottom: 48,
             }}
           >
-            Skills
+            {t.skills}
           </h2>
-
           <div
             className="skills-grid"
             style={{
@@ -1201,7 +1231,7 @@ export default function Portfolio() {
           >
             {skills.map((s) => (
               <div
-                key={s.label}
+                key={s.label.en}
                 className="skills-card"
                 style={{
                   background: "#141412",
@@ -1220,7 +1250,7 @@ export default function Portfolio() {
                     marginBottom: 16,
                   }}
                 >
-                  {s.label}
+                  {s.label[lang]}
                 </div>
                 <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
                   {s.items.map((item) => (
@@ -1272,7 +1302,7 @@ export default function Portfolio() {
             }}
           >
             <div style={{ width: 20, height: 1, background: "#E8FF5A" }} />
-            Where I&apos;ve worked
+            {t.whereWorked}
           </div>
           <h2
             className="section-title"
@@ -1284,7 +1314,7 @@ export default function Portfolio() {
               marginBottom: 48,
             }}
           >
-            Experience
+            {t.experience}
           </h2>
 
           <div style={{ display: "flex", flexDirection: "column" }}>
@@ -1346,7 +1376,7 @@ export default function Portfolio() {
                       fontWeight: 500,
                     }}
                   >
-                    {e.role}
+                    {e.role[lang]}
                   </div>
                   <ul
                     style={{
@@ -1356,7 +1386,7 @@ export default function Portfolio() {
                       gap: 6,
                     }}
                   >
-                    {e.bullets.map((b) => (
+                    {e.bullets[lang].map((b) => (
                       <li
                         key={b}
                         style={{
@@ -1406,7 +1436,7 @@ export default function Portfolio() {
                 marginBottom: 24,
               }}
             >
-              Education
+              {t.education}
             </div>
             <div
               className="education-grid"
@@ -1416,22 +1446,9 @@ export default function Portfolio() {
                 gap: 2,
               }}
             >
-              {[
-                {
-                  degree: "MSc Information Technology Management",
-                  school: "Berlin School of Business and Innovation",
-                  date: "Feb 2024 — Mar 2026",
-                  location: "Berlin, Germany",
-                },
-                {
-                  degree: "B.Tech Computer Science and Engineering",
-                  school: "Beant College of Engineering and Technology",
-                  date: "Jul 2011 — May 2015",
-                  location: "India",
-                },
-              ].map((edu) => (
+              {education.map((edu) => (
                 <div
-                  key={edu.degree}
+                  key={edu.degree.en}
                   className="education-card"
                   style={{
                     background: "#0D0D0B",
@@ -1449,7 +1466,7 @@ export default function Portfolio() {
                       marginBottom: 6,
                     }}
                   >
-                    {edu.degree}
+                    {edu.degree[lang]}
                   </div>
                   <div
                     style={{
@@ -1478,12 +1495,7 @@ export default function Portfolio() {
       </section>
 
       {/* BLOG */}
-      <section
-        id="blog"
-        style={{
-          padding: "80px 20px",
-        }}
-      >
+      <section id="blog" style={{ padding: "80px 20px" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <div
             style={{
@@ -1499,7 +1511,7 @@ export default function Portfolio() {
             }}
           >
             <div style={{ width: 20, height: 1, background: "#E8FF5A" }} />
-            Writing
+            {t.writing}
           </div>
           <h2
             className="section-title"
@@ -1511,9 +1523,8 @@ export default function Portfolio() {
               marginBottom: 48,
             }}
           >
-            Blog
+            {t.blog}
           </h2>
-
           <div
             className="blog-grid"
             style={{
@@ -1524,7 +1535,7 @@ export default function Portfolio() {
           >
             {blogs.map((b) => (
               <div
-                key={b.title}
+                key={b.title.en}
                 className="blog-card"
                 style={{
                   background: "#141412",
@@ -1542,10 +1553,10 @@ export default function Portfolio() {
                     fontSize: 10,
                     color: "#E8FF5A",
                     letterSpacing: "0.1em",
-                    textTransform: "uppercase",
+                    textTransform: "uppercase" as const,
                   }}
                 >
-                  {b.tag}
+                  {b.tag[lang]}
                 </div>
                 <div
                   style={{
@@ -1557,7 +1568,7 @@ export default function Portfolio() {
                     letterSpacing: "-0.02em",
                   }}
                 >
-                  {b.title}
+                  {b.title[lang]}
                 </div>
                 <div
                   style={{
@@ -1569,7 +1580,7 @@ export default function Portfolio() {
                     flex: 1,
                   }}
                 >
-                  {b.excerpt}
+                  {b.excerpt[lang]}
                 </div>
                 <div
                   style={{
@@ -1589,7 +1600,7 @@ export default function Portfolio() {
                       borderRadius: 4,
                     }}
                   >
-                    {b.date}
+                    {t.comingSoon}
                   </span>
                 </div>
               </div>
@@ -1622,7 +1633,7 @@ export default function Portfolio() {
             }}
           >
             <div style={{ width: 20, height: 1, background: "#E8FF5A" }} />
-            Let&apos;s work together
+            {t.letsWork}
           </div>
           <h2
             className="section-title"
@@ -1634,9 +1645,8 @@ export default function Portfolio() {
               marginBottom: 48,
             }}
           >
-            Contact
+            {t.contact}
           </h2>
-
           <div
             className="contact-grid"
             style={{
@@ -1657,9 +1667,7 @@ export default function Portfolio() {
                   fontWeight: 300,
                 }}
               >
-                I&apos;m actively looking for full-time opportunities in Berlin.
-                Valid German work permit — no sponsorship required. Open to
-                senior full stack, AI engineering, or lead roles.
+                {t.contactDesc}
               </p>
               <div
                 style={{ display: "flex", flexDirection: "column", gap: 10 }}
@@ -1746,13 +1754,13 @@ export default function Portfolio() {
                 {[
                   {
                     key: "name",
-                    label: "Name",
+                    label: t.name,
                     type: "text",
                     placeholder: "Gaurav Kumar",
                   },
                   {
                     key: "email",
-                    label: "Email",
+                    label: t.email,
                     type: "email",
                     placeholder: "you@company.com",
                   },
@@ -1766,7 +1774,7 @@ export default function Portfolio() {
                         color: "#5A5A54",
                         marginBottom: 8,
                         letterSpacing: "0.06em",
-                        textTransform: "uppercase",
+                        textTransform: "uppercase" as const,
                       }}
                     >
                       {field.label}
@@ -1806,13 +1814,13 @@ export default function Portfolio() {
                       color: "#5A5A54",
                       marginBottom: 8,
                       letterSpacing: "0.06em",
-                      textTransform: "uppercase",
+                      textTransform: "uppercase" as const,
                     }}
                   >
-                    Message
+                    {t.message}
                   </label>
                   <textarea
-                    placeholder="Tell me about the role..."
+                    placeholder={t.messagePlaceholder}
                     required
                     rows={4}
                     value={formData.message}
@@ -1869,7 +1877,7 @@ export default function Portfolio() {
                           animation: "spin 0.8s linear infinite",
                         }}
                       />
-                      Sending...
+                      {t.sending}
                     </>
                   ) : sent ? (
                     <>
@@ -1883,10 +1891,10 @@ export default function Portfolio() {
                       >
                         <polyline points="20 6 9 17 4 12" />
                       </svg>
-                      Message sent!
+                      {t.sent}
                     </>
                   ) : (
-                    "Send message →"
+                    t.send
                   )}
                 </button>
               </form>
@@ -1896,12 +1904,7 @@ export default function Portfolio() {
       </section>
 
       {/* FOOTER */}
-      <footer
-        style={{
-          padding: "28px 20px",
-          borderTop: "1px solid #1C1C19",
-        }}
-      >
+      <footer style={{ padding: "28px 20px", borderTop: "1px solid #1C1C19" }}>
         <div
           className="footer-content"
           style={{
