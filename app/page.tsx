@@ -148,7 +148,7 @@ export default function Portfolio() {
         "WhatsApp API",
         "Railway",
       ],
-      live: "https://leadloop-frontend-production.up.railway.app",
+      live: "https://getleadloop.app",
       github: "https://github.com/iamgaurav07/leadloop",
     },
     {
