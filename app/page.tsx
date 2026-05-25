@@ -3,17 +3,17 @@ import { useState, useEffect } from "react";
 
 const translations = {
   en: {
-    available: "Available for full-time roles · Germany",
+    available: "Available for full-time roles.",
     heroTitle1: "Full Stack",
     heroTitle2: "Engineer &",
     heroTitle3: "AI Builder.",
     heroSubtitle:
-      "6+ years building production SaaS, AI platforms, and ML tools. Based in Germany with a valid German work permit, no sponsorship required.",
+      "6+ years building production SaaS, AI platforms, and ML tools. Open to senior full stack and AI engineering roles.",
     viewWork: "View my work",
     getInTouch: "Get in touch",
     yearsExp: "Years experience",
     liveProducts: "Live AI products",
-    workPermit: "Work permit ✓",
+    workPermit: "EU work permit ✓",
     selectedWork: "Selected Work",
     projects: "Projects",
     whatIWorkWith: "What I work with",
@@ -26,7 +26,7 @@ const translations = {
     letsWork: "Let's work together",
     contact: "Contact",
     contactDesc:
-      "I'm actively looking for full-time opportunities in Berlin. Valid German work permit — no sponsorship required. Open to senior full stack, AI engineering, or lead roles.",
+      "I'm actively looking for full-time opportunities. EU work permit holder — no sponsorship required. Open to senior full stack, AI engineering, or lead roles.",
     name: "Name",
     email: "Email",
     message: "Message",
@@ -41,20 +41,20 @@ const translations = {
     nav: ["Projects", "Skills", "Experience", "Blog", "Contact"],
     navHrefs: ["projects", "skills", "experience", "blog", "contact"],
     profile:
-      "Full Stack Engineer with 6+ years of experience delivering scalable SaaS, Fintech, and AI-powered platforms. Production expertise in TypeScript, React, Node.js, and Python. Independently shipped four live AI products covering WhatsApp CRM with real-time messaging, RAG pipelines, GitHub App integrations, and ML analytics. Based in Berlin with a valid German work permit.",
+      "Full Stack Engineer with 6+ years of experience delivering scalable SaaS, Fintech, and AI-powered platforms. Production expertise in TypeScript, React, Node.js, and Python. Independently shipped four live AI products — a WhatsApp CRM with real-time messaging and end-to-end encryption, an AI code review platform, a RAG-based agent builder, and an ML portfolio analytics tool. EU work permit holder, immediately available.",
   },
   de: {
-    available: "Verfügbar für Vollzeitstellen · Deutschland",
+    available: "Verfügbar für Vollzeitstellen.",
     heroTitle1: "Full Stack",
     heroTitle2: "Entwickler &",
     heroTitle3: "KI-Entwickler.",
     heroSubtitle:
-      "6+ Jahre Erfahrung in der Entwicklung von SaaS-, KI- und ML-Plattformen. Wohnhaft in Deutschland mit gültiger Arbeitserlaubnis, kein Sponsoring erforderlich.",
+      "6+ Jahre Erfahrung in der Entwicklung von SaaS-, KI- und ML-Plattformen. Offen für Senior Full Stack- und KI-Engineering-Rollen.",
     viewWork: "Meine Arbeit ansehen",
     getInTouch: "Kontakt aufnehmen",
     yearsExp: "Jahre Erfahrung",
     liveProducts: "Live KI-Produkte",
-    workPermit: "Arbeitserlaubnis ✓",
+    workPermit: "EU-Arbeitserlaubnis ✓",
     selectedWork: "Ausgewählte Arbeiten",
     projects: "Projekte",
     whatIWorkWith: "Womit ich arbeite",
@@ -67,7 +67,7 @@ const translations = {
     letsWork: "Lass uns zusammenarbeiten",
     contact: "Kontakt",
     contactDesc:
-      "Ich suche aktiv nach Vollzeitstellen in Berlin. Gültige deutsche Arbeitserlaubnis — kein Sponsoring erforderlich. Offen für Senior Full Stack, KI-Engineering oder Lead-Rollen.",
+      "Ich suche aktiv nach Vollzeitstellen. EU-Arbeitserlaubnis vorhanden — kein Sponsoring erforderlich. Offen für Senior Full Stack, KI-Engineering oder Lead-Rollen.",
     name: "Name",
     email: "E-Mail",
     message: "Nachricht",
@@ -82,7 +82,7 @@ const translations = {
     nav: ["Projekte", "Kenntnisse", "Erfahrung", "Blog", "Kontakt"],
     navHrefs: ["projects", "skills", "experience", "blog", "contact"],
     profile:
-      "Full-Stack-Entwickler mit 6+ Jahren Erfahrung in skalierbaren SaaS-, Fintech- und KI-Plattformen. Produktive Expertise in TypeScript, React, Node.js und Python. Vier Live-KI-Produkte eigenständig entwickelt und deployt — von WhatsApp-CRM mit Echtzeit-Messaging über RAG-Pipelines bis hin zu ML-Analysen. Wohnhaft in Berlin mit gültiger Arbeitserlaubnis.",
+      "Full-Stack-Entwickler mit 6+ Jahren Erfahrung in skalierbaren SaaS-, Fintech- und KI-Plattformen. Produktive Expertise in TypeScript, React, Node.js und Python. Vier Live-KI-Produkte eigenständig entwickelt — ein WhatsApp-CRM mit Echtzeit-Messaging und Ende-zu-Ende-Verschlüsselung, eine KI-Code-Review-Plattform, einen RAG-basierten Agent-Builder und ein ML-Portfolio-Analysetool. EU-Arbeitserlaubnis vorhanden, sofort verfügbar.",
   },
 };
 
@@ -134,8 +134,8 @@ export default function Portfolio() {
       number: "01",
       title: "LeadLoop",
       desc: {
-        en: "Production-grade multi-tenant WhatsApp & Email CRM. Features real-time messaging via WebSockets, AI-powered reply suggestions using Groq (Llama 3.3 70B), pipeline management with auto-detection from message content, Stripe billing with plan gating, and dark/light theme. Built for businesses to manage customer conversations at scale.",
-        de: "Produktionsreifes Multi-Tenant WhatsApp- und E-Mail-CRM. Echtzeit-Messaging via WebSockets, KI-gestützte Antwortvorschläge mit Groq (Llama 3.3 70B), Pipeline-Management mit Auto-Erkennung, Stripe-Billing mit Plan-Gating und Dark/Light-Theme.",
+        en: "Production-grade multi-tenant WhatsApp & Email CRM. Features real-time messaging via WebSockets, AI-powered reply suggestions (Groq Llama 3.3 70B), AES-256-GCM end-to-end encryption for messages and contacts, sales pipeline with AI auto-detection, multi-agent team inbox with conversation assignment, push notifications via Web Push API (VAPID), broadcast messaging, Stripe billing with plan gating, and PWA support. Built for small businesses to manage customer conversations at scale.",
+        de: "Produktionsreifes Multi-Tenant WhatsApp- und E-Mail-CRM. Echtzeit-Messaging via WebSockets, KI-gestützte Antwortvorschläge (Groq Llama 3.3 70B), AES-256-GCM-Verschlüsselung, Multi-Agent-Posteingang, Push-Benachrichtigungen via Web Push API, Broadcast-Messaging, Stripe-Billing und PWA-Support.",
       },
       tags: [
         "Next.js 15",
@@ -144,9 +144,12 @@ export default function Portfolio() {
         "PostgreSQL",
         "WebSockets",
         "Groq AI",
+        "AES-256-GCM",
+        "Web Push API",
+        "WhatsApp Business API",
         "Stripe",
-        "WhatsApp API",
         "Railway",
+        "PWA",
       ],
       live: "https://getleadloop.app",
       github: "https://github.com/iamgaurav07/leadloop",
@@ -254,6 +257,8 @@ export default function Portfolio() {
         "Prophet",
         "Isolation Forest",
         "KMeans",
+        "Claude API",
+        "Whisper (OpenAI)",
       ],
     },
     {
