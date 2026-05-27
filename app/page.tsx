@@ -13,7 +13,7 @@ const translations = {
     getInTouch: "Get in touch",
     yearsExp: "Years experience",
     liveProducts: "Live AI products",
-    workPermit: "EU work permit ✓",
+    workPermit: "Work Permit ✓",
     selectedWork: "Selected Work",
     projects: "Projects",
     whatIWorkWith: "What I work with",
@@ -939,7 +939,7 @@ export default function Portfolio() {
             {[
               ["6+", t.yearsExp],
               ["4", t.liveProducts],
-              ["Berlin", t.workPermit],
+              ["Germany", t.workPermit],
             ].map(([n, l], i) => (
               <div
                 key={n}
