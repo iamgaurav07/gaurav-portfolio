@@ -132,6 +132,30 @@ export default function Portfolio() {
   const projects = [
     {
       number: "01",
+      title: "FundFlow",
+      desc: {
+        en: "Full-stack fund management platform for General Partners and Limited Partners. Features DocuSign-style document signing with drag-and-drop PDF field placement and audit certificates, complete cap table management with dilution modeling and waterfall analysis, capital call automation with pro-rata LP allocation, Claude AI assistant that answers questions about your real portfolio data via SSE streaming, real-time notifications via Socket.io WebSocket gateway, XLS report generation, Python FastAPI ML service with Prophet forecasting and anomaly detection, and separate GP/LP portals with role-based access.",
+        de: "Full-Stack-Fondsverwaltungsplattform für General Partner und Limited Partner. DocuSign-ähnliche Dokumentenunterzeichnung, vollständiges Cap-Table-Management mit Verwässerungsmodellierung, Capital-Call-Automatisierung, Claude-KI-Assistent für Echtzeit-Portfoliofragen, WebSocket-Benachrichtigungen, XLS-Berichtsgenerierung und Python FastAPI ML-Service.",
+      },
+      tags: [
+        "Next.js 15",
+        "TypeScript",
+        "NestJS",
+        "PostgreSQL",
+        "Socket.io",
+        "Claude AI",
+        "react-pdf",
+        "pdf-lib",
+        "ExcelJS",
+        "Python FastAPI",
+        "scikit-learn",
+        "AWS",
+      ],
+      live: "https://fundflow.gauravcode.com",
+      github: "https://github.com/iamgaurav07/fundflow",
+    },
+    {
+      number: "02",
       title: "LeadLoop",
       desc: {
         en: "Production-grade multi-tenant WhatsApp & Email CRM. Features real-time messaging via WebSockets, AI-powered reply suggestions (Groq Llama 3.3 70B), AES-256-GCM end-to-end encryption for messages and contacts, sales pipeline with AI auto-detection, multi-agent team inbox with conversation assignment, push notifications via Web Push API (VAPID), broadcast messaging, Stripe billing with plan gating, and PWA support. Built for small businesses to manage customer conversations at scale.",
@@ -155,7 +179,7 @@ export default function Portfolio() {
       github: "https://github.com/iamgaurav07/leadloop",
     },
     {
-      number: "02",
+      number: "03",
       title: "CodeLens",
       desc: {
         en: "Production-grade multi-tenant AI code review SaaS. Connects to GitHub via a GitHub App, reviews every PR within 30 seconds using GPT-4o, posts structured feedback with severity scores, and streams results to a real-time dashboard via SSE.",
@@ -175,7 +199,7 @@ export default function Portfolio() {
       github: "https://github.com/iamgaurav07/codelens",
     },
     {
-      number: "03",
+      number: "04",
       title: "AgentFlow",
       desc: {
         en: "Full-stack AI agent SaaS platform. Users create custom agents with system prompts, tools, and private knowledge bases. RAG pipeline using pgvector for semantic search over uploaded documents. Agents stream responses token-by-token via SSE.",
@@ -195,7 +219,7 @@ export default function Portfolio() {
       github: "https://github.com/iamgaurav07/agent-platform",
     },
     {
-      number: "04",
+      number: "05",
       title: "PulseVC",
       desc: {
         en: "ML-powered VC portfolio analysis platform. Investors upload CSV data and receive 6-month forecasting via Prophet, anomaly detection via Isolation Forest, KMeans clustering, and natural language Q&A over their portfolio companies.",
