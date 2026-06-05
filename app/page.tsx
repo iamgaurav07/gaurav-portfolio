@@ -962,7 +962,7 @@ export default function Portfolio() {
           >
             {[
               ["6+", t.yearsExp],
-              ["4", t.liveProducts],
+              [projects.length || 0, t.liveProducts],
               ["Germany", t.workPermit],
             ].map(([n, l], i) => (
               <div
