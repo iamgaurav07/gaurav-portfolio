@@ -200,6 +200,32 @@ export default function Portfolio() {
     },
     {
       number: "04",
+      title: "DermTrack",
+      desc: {
+        en: "Secure medical photo tracking platform for dermatology patients and doctors. Features private daily photo uploads (up to 10 per day) with calendar history, real-time doctor-patient chat via WebSockets with image sharing, symptom tracking with interactive charts, before/after photo comparison slider, AI-powered health score, diagnosis tagging per photo, PDF report export, email sharing via Resend, and role-based access with JWT auth. Built for real clinical use with end-to-end privacy.",
+        de: "Sichere medizinische Foto-Tracking-Plattform für Dermatologie-Patienten und Ärzte. Tägliche Foto-Uploads mit Kalenderhistorie, Echtzeit-Chat via WebSockets, Symptom-Tracking mit interaktiven Charts, Vorher-Nachher-Vergleich, KI-Gesundheitsscore, Diagnose-Tags, PDF-Export und E-Mail-Teilen via Resend.",
+      },
+      tags: [
+        "Next.js 15",
+        "TypeScript",
+        "NestJS",
+        "PostgreSQL",
+        "TypeORM",
+        "Socket.io",
+        "UploadThing",
+        "Resend",
+        "JWT",
+        "WebSockets",
+        "jsPDF",
+        "Recharts",
+        "Docker",
+        "Railway",
+      ],
+      live: "https://dermtrack.mom",
+      github: "https://github.com/iamgaurav07/dermtrack-frontend",
+    },
+    {
+      number: "05",
       title: "AgentFlow",
       desc: {
         en: "Full-stack AI agent SaaS platform. Users create custom agents with system prompts, tools, and private knowledge bases. RAG pipeline using pgvector for semantic search over uploaded documents. Agents stream responses token-by-token via SSE.",
@@ -219,7 +245,7 @@ export default function Portfolio() {
       github: "https://github.com/iamgaurav07/agent-platform",
     },
     {
-      number: "05",
+      number: "06",
       title: "PulseVC",
       desc: {
         en: "ML-powered VC portfolio analysis platform. Investors upload CSV data and receive 6-month forecasting via Prophet, anomaly detection via Isolation Forest, KMeans clustering, and natural language Q&A over their portfolio companies.",
