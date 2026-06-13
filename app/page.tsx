@@ -151,7 +151,7 @@ export default function Portfolio() {
         "scikit-learn",
         "AWS",
       ],
-      live: "https://fundflow.gauravcode.com",
+      live: "https://fundflow-web-production.up.railway.app",
       github: "https://github.com/iamgaurav07/fundflow",
     },
     {
