@@ -241,7 +241,7 @@ export default function Portfolio() {
         "RAG",
         "Railway",
       ],
-      live: "https://agent-platform-production-6865.up.railway.app",
+      live: "https://agent-platform-production-2772.up.railway.app",
       github: "https://github.com/iamgaurav07/agent-platform",
     },
     {
