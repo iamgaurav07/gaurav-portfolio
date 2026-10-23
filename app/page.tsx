@@ -12,8 +12,8 @@ const translations = {
     viewWork: "View my work",
     getInTouch: "Get in touch",
     yearsExp: "Years experience",
-    liveProducts: "Live AI products",
-    workPermit: "Work Permit ✓",
+    liveProducts: "Live products",
+    workPermit: "Eligible with a job offer",
     selectedWork: "Selected Work",
     projects: "Projects",
     whatIWorkWith: "What I work with",
@@ -26,7 +26,7 @@ const translations = {
     letsWork: "Let's work together",
     contact: "Contact",
     contactDesc:
-      "I'm actively looking for full-time opportunities. EU work permit holder — no sponsorship required. Open to senior full stack, AI engineering, or lead roles.",
+      "I'm actively looking for full-time opportunities. Based in Germany and available immediately, eligible for the EU Blue Card with a job offer. Open to senior full stack, AI engineering, or lead roles.",
     name: "Name",
     email: "Email",
     message: "Message",
@@ -41,7 +41,7 @@ const translations = {
     nav: ["Projects", "Skills", "Experience", "Blog", "Contact"],
     navHrefs: ["projects", "skills", "experience", "blog", "contact"],
     profile:
-      "Full Stack Engineer with 6+ years of experience delivering scalable SaaS, Fintech, and AI-powered platforms. Production expertise in TypeScript, React, Node.js, and Python. Independently shipped four live AI products — a WhatsApp CRM with real-time messaging and end-to-end encryption, an AI code review platform, a RAG-based agent builder, and an ML portfolio analytics tool. EU work permit holder, immediately available.",
+      "Full Stack Engineer with 6+ years of experience building scalable SaaS, fintech and AI-powered platforms, mainly with TypeScript, React, Node.js and Python. Since 2025 I have designed, built and deployed six live products on my own, including a WhatsApp CRM with AES-256-GCM encryption and real-time messaging, an AI code review app for GitHub, a RAG-based agent builder and an ML portfolio analytics tool. Living in Germany, available immediately, eligible for the EU Blue Card with a job offer.",
   },
   de: {
     available: "Verfügbar für Vollzeitstellen.",
@@ -53,8 +53,8 @@ const translations = {
     viewWork: "Meine Arbeit ansehen",
     getInTouch: "Kontakt aufnehmen",
     yearsExp: "Jahre Erfahrung",
-    liveProducts: "Live KI-Produkte",
-    workPermit: "EU-Arbeitserlaubnis ✓",
+    liveProducts: "Live-Produkte",
+    workPermit: "Mit Jobangebot beantragbar",
     selectedWork: "Ausgewählte Arbeiten",
     projects: "Projekte",
     whatIWorkWith: "Womit ich arbeite",
@@ -67,7 +67,7 @@ const translations = {
     letsWork: "Lass uns zusammenarbeiten",
     contact: "Kontakt",
     contactDesc:
-      "Ich suche aktiv nach Vollzeitstellen. EU-Arbeitserlaubnis vorhanden — kein Sponsoring erforderlich. Offen für Senior Full Stack, KI-Engineering oder Lead-Rollen.",
+      "Ich suche aktiv nach Vollzeitstellen. In Deutschland ansässig und sofort verfügbar, EU Blue Card mit Jobangebot möglich. Offen für Senior Full Stack, KI-Engineering oder Lead-Rollen.",
     name: "Name",
     email: "E-Mail",
     message: "Nachricht",
@@ -82,7 +82,7 @@ const translations = {
     nav: ["Projekte", "Kenntnisse", "Erfahrung", "Blog", "Kontakt"],
     navHrefs: ["projects", "skills", "experience", "blog", "contact"],
     profile:
-      "Full-Stack-Entwickler mit 6+ Jahren Erfahrung in skalierbaren SaaS-, Fintech- und KI-Plattformen. Produktive Expertise in TypeScript, React, Node.js und Python. Vier Live-KI-Produkte eigenständig entwickelt — ein WhatsApp-CRM mit Echtzeit-Messaging und Ende-zu-Ende-Verschlüsselung, eine KI-Code-Review-Plattform, einen RAG-basierten Agent-Builder und ein ML-Portfolio-Analysetool. EU-Arbeitserlaubnis vorhanden, sofort verfügbar.",
+      "Full-Stack-Entwickler mit 6+ Jahren Erfahrung in der Entwicklung skalierbarer SaaS-, Fintech- und KI-Plattformen, vor allem mit TypeScript, React, Node.js und Python. Seit 2025 habe ich sechs Live-Produkte eigenständig entworfen, gebaut und bereitgestellt, darunter ein WhatsApp-CRM mit AES-256-GCM-Verschlüsselung und Echtzeit-Messaging, eine KI-Code-Review-App für GitHub, einen RAG-basierten Agent-Builder und ein ML-Portfolio-Analysetool. In Deutschland ansässig, sofort verfügbar, EU Blue Card mit Jobangebot möglich.",
   },
 };
 
@@ -99,6 +99,12 @@ export default function Portfolio() {
   const [scrolled, setScrolled] = useState(false);
 
   const t = translations[lang];
+
+  // Blog posts are not published yet. Set to true once at least one post is live.
+  const SHOW_BLOG = false;
+  const navItems = t.nav
+    .map((label, i) => ({ label, href: t.navHrefs[i] }))
+    .filter((item) => SHOW_BLOG || item.href !== "blog");
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -158,7 +164,7 @@ export default function Portfolio() {
       number: "02",
       title: "LeadLoop",
       desc: {
-        en: "Production-grade multi-tenant WhatsApp & Email CRM. Features real-time messaging via WebSockets, AI-powered reply suggestions (Groq Llama 3.3 70B), AES-256-GCM end-to-end encryption for messages and contacts, sales pipeline with AI auto-detection, multi-agent team inbox with conversation assignment, push notifications via Web Push API (VAPID), broadcast messaging, Stripe billing with plan gating, and PWA support. Built for small businesses to manage customer conversations at scale.",
+        en: "Production-grade multi-tenant WhatsApp & Email CRM. Features real-time messaging via WebSockets, AI-powered reply suggestions (Groq Llama 3.3 70B), AES-256-GCM encryption for messages and contacts, sales pipeline with AI auto-detection, multi-agent team inbox with conversation assignment, push notifications via Web Push API (VAPID), broadcast messaging, Stripe billing with plan gating, and PWA support. Built for small businesses to manage customer conversations at scale.",
         de: "Produktionsreifes Multi-Tenant WhatsApp- und E-Mail-CRM. Echtzeit-Messaging via WebSockets, KI-gestützte Antwortvorschläge (Groq Llama 3.3 70B), AES-256-GCM-Verschlüsselung, Multi-Agent-Posteingang, Push-Benachrichtigungen via Web Push API, Broadcast-Messaging, Stripe-Billing und PWA-Support.",
       },
       tags: [
@@ -202,7 +208,7 @@ export default function Portfolio() {
       number: "04",
       title: "DermTrack",
       desc: {
-        en: "Secure medical photo tracking platform for dermatology patients and doctors. Features private daily photo uploads (up to 10 per day) with calendar history, real-time doctor-patient chat via WebSockets with image sharing, symptom tracking with interactive charts, before/after photo comparison slider, AI-powered health score, diagnosis tagging per photo, PDF report export, email sharing via Resend, and role-based access with JWT auth. Built for real clinical use with end-to-end privacy.",
+        en: "Secure medical photo tracking platform for dermatology patients and doctors. Features private daily photo uploads (up to 10 per day) with calendar history, real-time doctor-patient chat via WebSockets with image sharing, symptom tracking with interactive charts, before/after photo comparison slider, AI-powered health score, diagnosis tagging per photo, PDF report export, email sharing via Resend, and role-based access with JWT auth. Includes a doctor-patient consent system for access control.",
         de: "Sichere medizinische Foto-Tracking-Plattform für Dermatologie-Patienten und Ärzte. Tägliche Foto-Uploads mit Kalenderhistorie, Echtzeit-Chat via WebSockets, Symptom-Tracking mit interaktiven Charts, Vorher-Nachher-Vergleich, KI-Gesundheitsscore, Diagnose-Tags, PDF-Export und E-Mail-Teilen via Resend.",
       },
       tags: [
@@ -269,19 +275,21 @@ export default function Portfolio() {
   const skills = [
     {
       label: { en: "Languages", de: "Sprachen" },
-      items: ["TypeScript", "JavaScript", "Python", "SQL", "PHP"],
+      items: ["TypeScript", "JavaScript", "Python", "SQL"],
     },
     {
       label: { en: "Frontend", de: "Frontend" },
-      items: ["React", "Next.js 15", "Angular", "Redux", "TailwindCSS", "tRPC"],
+      items: ["React", "Next.js", "Redux", "Tailwind CSS"],
     },
     {
       label: { en: "Backend", de: "Backend" },
       items: [
         "Node.js",
         "NestJS",
-        "Express.js",
+        "Express",
         "FastAPI",
+        "tRPC",
+        "REST",
         "GraphQL",
         "WebSockets",
       ],
@@ -290,41 +298,108 @@ export default function Portfolio() {
       label: { en: "Databases", de: "Datenbanken" },
       items: [
         "PostgreSQL",
-        "pgvector",
         "MongoDB",
         "Redis",
-        "Drizzle ORM",
+        "pgvector",
         "Prisma",
+        "Drizzle ORM",
       ],
     },
     {
       label: { en: "AI & ML", de: "KI & ML" },
       items: [
         "OpenAI API",
-        "Groq AI",
-        "RAG Pipelines",
+        "Claude API",
+        "Groq",
+        "RAG",
         "Vector Search",
         "Prophet",
-        "Isolation Forest",
-        "KMeans",
-        "Claude API",
-        "Whisper (OpenAI)",
+        "scikit-learn",
       ],
     },
     {
       label: { en: "Cloud & DevOps", de: "Cloud & DevOps" },
       items: [
-        "AWS (EC2/ECS/Lambda)",
+        "AWS (EC2, ECS, Lambda, S3, SQS)",
         "Docker",
-        "Kubernetes",
         "GitHub Actions",
+        "GitLab CI/CD",
+        "Jest",
         "Railway",
-        "Render",
+      ],
+    },
+    {
+      label: { en: "Architecture & Security", de: "Architektur & Sicherheit" },
+      items: [
+        "Microservices",
+        "Event-driven design",
+        "Multi-tenancy",
+        "JWT",
+        "OAuth2",
+        "RBAC",
       ],
     },
   ];
 
   const experience = [
+    {
+      date: "Mar 2026 — Present",
+      company: "Independent Projects",
+      role: { en: "Software Developer", de: "Software-Entwickler" },
+      location: "Germany",
+      bullets: {
+        en: [
+          "LeadLoop: multi-channel CRM on NestJS, Next.js and PostgreSQL. WhatsApp Business API integration with live message status over Socket.io, LLM reply suggestions (Groq) and Stripe subscriptions with plan limits. In production",
+          "CodeLens: GitHub App that gets a structured review from the OpenAI API for every pull request and blocks the merge on high-severity findings. HMAC-verified webhooks and a live dashboard over server-sent events",
+        ],
+        de: [
+          "LeadLoop: Multi-Channel-CRM mit NestJS, Next.js und PostgreSQL. WhatsApp-Business-API-Anbindung mit Live-Nachrichtenstatus über Socket.io, LLM-Antwortvorschläge (Groq) und Stripe-Abonnements mit Plan-Limits. Im Produktivbetrieb",
+          "CodeLens: GitHub App, die für jeden Pull Request ein strukturiertes Review über die OpenAI API erstellt und den Merge bei schwerwiegenden Befunden blockiert. HMAC-geprüfte Webhooks und ein Live-Dashboard über Server-Sent Events",
+        ],
+      },
+    },
+    {
+      date: "Feb 2024 — Mar 2026",
+      company: "Independent Projects",
+      role: {
+        en: "Software Developer, alongside M.Sc. studies",
+        de: "Software-Entwickler, neben dem M.Sc.-Studium",
+      },
+      location: "Berlin, Germany",
+      bullets: {
+        en: [
+          "FundFlow: multi-tenant fund management platform with separate GP and LP portals, role-based access, per-tenant data isolation, cap table tools, e-signatures and automated capital calls",
+          "AgentFlow: AI agent platform with custom prompts, tools and retrieval over PDF, CSV and text files (pgvector). Type-safe API with tRPC and Zod, answers streamed to the browser",
+          "PulseVC: portfolio analytics with revenue forecasting (Prophet), anomaly detection and clustering, plus questions in plain language on uploaded data",
+        ],
+        de: [
+          "FundFlow: mandantenfähige Fondsverwaltungsplattform mit getrennten GP- und LP-Portalen, rollenbasiertem Zugriff, Datentrennung pro Mandant, Cap-Table-Tools, E-Signaturen und automatisierten Capital Calls",
+          "AgentFlow: KI-Agent-Plattform mit eigenen Prompts, Tools und Retrieval über PDF-, CSV- und Textdateien (pgvector). Typsichere API mit tRPC und Zod, Antworten werden im Browser gestreamt",
+          "PulseVC: Portfolio-Analyse mit Umsatzprognose (Prophet), Anomalieerkennung und Clustering sowie Fragen in natürlicher Sprache zu hochgeladenen Daten",
+        ],
+      },
+    },
+    {
+      date: "Oct 2022 — Jan 2023",
+      company: "T12 (formerly Two12)",
+      role: {
+        en: "Software Developer (remote)",
+        de: "Software-Entwickler (remote)",
+      },
+      location: "Remote",
+      bullets: {
+        en: [
+          "Cleaned up a legacy financial codebase: split oversized modules, removed duplicated code and added unit tests",
+          "Reworked slow and inconsistent REST endpoints with standard response shapes and error handling for the React frontend",
+          "Built features for the equity side of the product: capital call calculations, 409A valuation workflows and cap table dilution modelling",
+        ],
+        de: [
+          "Bereinigte eine veraltete Finanz-Codebasis: überlange Module aufgeteilt, doppelten Code entfernt und Unit-Tests ergänzt",
+          "Überarbeitete langsame und uneinheitliche REST-Endpunkte mit einheitlichen Antwortformaten und Fehlerbehandlung für das React-Frontend",
+          "Entwickelte Funktionen für den Equity-Bereich des Produkts: Capital-Call-Berechnungen, 409A-Bewertungsabläufe und Cap-Table-Verwässerungsmodelle",
+        ],
+      },
+    },
     {
       date: "Jan 2022 — Sep 2022",
       company: "Netsmartz",
@@ -332,19 +407,19 @@ export default function Portfolio() {
       location: "Chandigarh, India",
       bullets: {
         en: [
-          "Designed REST APIs with Node.js, Express, MongoDB, and Redis for high-traffic applications",
-          "Architected GitHub Actions CI/CD pipelines and Docker containerisation",
-          "Optimised AWS infrastructure (EC2, ECS, Lambda) for cost and performance",
+          "Wrote REST APIs in Node.js and Express on MongoDB and Redis for high-traffic applications, using caching and load balancing",
+          "Set up GitHub Actions pipelines and Docker containers for zero-downtime deployments, wrote Jest tests and reviewed code",
+          "Found performance bottlenecks on AWS (EC2, ECS, Lambda) and fixed them, which improved speed and reduced cloud costs",
         ],
         de: [
-          "Entwarf REST APIs mit Node.js, Express, MongoDB und Redis für hochfrequentierte Anwendungen",
-          "Konzipierte GitHub Actions CI/CD-Pipelines und Docker-Containerisierung",
-          "Optimierte AWS-Infrastruktur (EC2, ECS, Lambda) für Kosteneffizienz und Performance",
+          "Entwickelte REST-APIs mit Node.js und Express auf MongoDB und Redis für hochfrequentierte Anwendungen, mit Caching und Load Balancing",
+          "Richtete GitHub-Actions-Pipelines und Docker-Container für Zero-Downtime-Deployments ein, schrieb Jest-Tests und führte Code-Reviews durch",
+          "Fand Performance-Engpässe auf AWS (EC2, ECS, Lambda) und behob sie, was Geschwindigkeit verbesserte und Cloud-Kosten senkte",
         ],
       },
     },
     {
-      date: "Jun 2020 — Jan 2022",
+      date: "Jul 2020 — Jan 2022",
       company: "SmartData Enterprises",
       role: {
         en: "Senior Associate — Software Engineer",
@@ -353,14 +428,14 @@ export default function Portfolio() {
       location: "Mohali, India",
       bullets: {
         en: [
-          "Led Node.js microservices development across multiple enterprise SaaS products",
-          "Built React/TypeScript frontends with Redux for complex state management",
-          "Managed AWS infrastructure; configured GitLab CI/CD for zero-downtime deployments",
+          "Led backend development of Node.js microservices for multi-tenant enterprise B2B SaaS products",
+          "Designed PostgreSQL and MongoDB schemas for high-volume workloads and used message queues",
+          "Built React/TypeScript frontends with Redux, ran AWS (EC2, SQS, Lambda, ECS) and GitLab CI/CD",
         ],
         de: [
-          "Leitete Node.js-Microservices-Entwicklung für mehrere Enterprise-SaaS-Produkte",
-          "Baute React/TypeScript-Frontends mit Redux für komplexes State-Management",
-          "Verwaltete AWS-Infrastruktur; konfigurierte GitLab CI/CD für Zero-Downtime-Deployments",
+          "Leitete die Backend-Entwicklung von Node.js-Microservices für mandantenfähige Enterprise-B2B-SaaS-Produkte",
+          "Entwarf PostgreSQL- und MongoDB-Schemata für hohe Datenlasten und setzte Message Queues ein",
+          "Baute React/TypeScript-Frontends mit Redux, betrieb AWS (EC2, SQS, Lambda, ECS) und GitLab CI/CD",
         ],
       },
     },
@@ -371,12 +446,12 @@ export default function Portfolio() {
       location: "Jalandhar, India",
       bullets: {
         en: [
-          "Developed full-stack B2B SaaS features with Angular, Node.js, and Express",
-          "Integrated HubSpot, Salesforce, and Marketo via REST APIs for CRM synchronisation",
+          "Built B2B SaaS features with Angular, Node.js and Express, including REST APIs and automated tests",
+          "Integrated HubSpot, Salesforce and Marketo through their APIs to keep customer data in sync",
         ],
         de: [
-          "Entwickelte Full-Stack B2B-SaaS-Features mit Angular, Node.js und Express",
-          "Integrierte HubSpot, Salesforce und Marketo via REST APIs für CRM-Synchronisierung",
+          "Entwickelte B2B-SaaS-Funktionen mit Angular, Node.js und Express, einschließlich REST-APIs und automatisierter Tests",
+          "Integrierte HubSpot, Salesforce und Marketo über deren APIs, um Kundendaten synchron zu halten",
         ],
       },
     },
@@ -387,12 +462,26 @@ export default function Portfolio() {
       location: "Mohali, India",
       bullets: {
         en: [
-          "Delivered full-stack client solutions using PHP, MySQL, JavaScript, and MongoDB",
-          "Designed and optimised relational and NoSQL schemas for multiple projects",
+          "Web applications for several clients with PHP, MySQL and MongoDB",
+          "Designed relational and NoSQL schemas for multiple projects",
         ],
         de: [
-          "Lieferte Full-Stack-Lösungen mit PHP, MySQL, JavaScript und MongoDB",
-          "Entwarf und optimierte relationale und NoSQL-Datenbankschemata",
+          "Webanwendungen für mehrere Kunden mit PHP, MySQL und MongoDB",
+          "Entwarf relationale und NoSQL-Datenbankschemata für mehrere Projekte",
+        ],
+      },
+    },
+    {
+      date: "May 2015 — Jun 2016",
+      company: "Netmax Technologies",
+      role: { en: "Web Developer", de: "Web-Entwickler" },
+      location: "Chandigarh, India",
+      bullets: {
+        en: [
+          "Websites and web applications with PHP, MySQL, HTML, CSS and JavaScript at an agency, with several projects running in parallel",
+        ],
+        de: [
+          "Websites und Webanwendungen mit PHP, MySQL, HTML, CSS und JavaScript in einer Agentur, mit mehreren parallel laufenden Projekten",
         ],
       },
     },
@@ -407,6 +496,20 @@ export default function Portfolio() {
       school: "Berlin School of Business and Innovation",
       date: "Feb 2024 — Mar 2026",
       location: "Berlin, Germany",
+      note: null,
+    },
+    {
+      degree: {
+        en: "Electromobility studies",
+        de: "Studium Elektromobilität",
+      },
+      school: "FAU Erlangen-Nürnberg",
+      date: "Feb 2023 — Jan 2024",
+      location: "Erlangen, Germany",
+      note: {
+        en: "Left after about a year to move into IT Management, which is closer to my software background.",
+        de: "Nach rund einem Jahr in den Studiengang IT-Management gewechselt, der näher an meinem Softwarehintergrund liegt.",
+      },
     },
     {
       degree: {
@@ -416,6 +519,7 @@ export default function Portfolio() {
       school: "Beant College of Engineering and Technology",
       date: "Jul 2011 — May 2015",
       location: "India",
+      note: null,
     },
   ];
 
@@ -589,10 +693,10 @@ export default function Portfolio() {
           className="desktop-nav"
           style={{ display: "flex", alignItems: "center", gap: 32 }}
         >
-          {t.nav.map((link, i) => (
+          {navItems.map(({ label: link, href }) => (
             <a
               key={link}
-              href={`#${t.navHrefs[i]}`}
+              href={`#${href}`}
               className="nav-link-item"
               style={{
                 fontSize: 13,
@@ -743,10 +847,10 @@ export default function Portfolio() {
               </button>
             ))}
           </div>
-          {t.nav.map((link, i) => (
+          {navItems.map(({ label: link, href }) => (
             <a
               key={link}
-              href={`#${t.navHrefs[i]}`}
+              href={`#${href}`}
               onClick={handleNavClick}
               style={{
                 fontSize: 16,
@@ -953,6 +1057,7 @@ export default function Portfolio() {
             <a
               href="https://github.com/iamgaurav07"
               target="_blank"
+              rel="noopener noreferrer"
               style={{
                 display: "inline-flex",
                 alignItems: "center",
@@ -989,7 +1094,7 @@ export default function Portfolio() {
             {[
               ["6+", t.yearsExp],
               [projects.length || 0, t.liveProducts],
-              ["Germany", t.workPermit],
+              ["EU Blue Card", t.workPermit],
             ].map(([n, l], i) => (
               <div
                 key={n}
@@ -1155,6 +1260,7 @@ export default function Portfolio() {
                     <a
                       href={p.live}
                       target="_blank"
+                      rel="noopener noreferrer"
                       style={{
                         display: "inline-flex",
                         alignItems: "center",
@@ -1186,6 +1292,7 @@ export default function Portfolio() {
                     <a
                       href={p.github}
                       target="_blank"
+                      rel="noopener noreferrer"
                       style={{
                         display: "inline-flex",
                         alignItems: "center",
@@ -1375,7 +1482,7 @@ export default function Portfolio() {
           <div style={{ display: "flex", flexDirection: "column" }}>
             {experience.map((e, i) => (
               <div
-                key={e.company}
+                key={`${e.company}-${e.date}`}
                 className="experience-grid"
                 style={{
                   display: "grid",
@@ -1542,6 +1649,20 @@ export default function Portfolio() {
                   >
                     {edu.date} · {edu.location}
                   </div>
+                  {edu.note && (
+                    <div
+                      style={{
+                        fontFamily: "'DM Sans', sans-serif",
+                        fontSize: "clamp(12px, 3.5vw, 13px)",
+                        color: "#9B9A92",
+                        marginTop: 10,
+                        lineHeight: 1.5,
+                        fontWeight: 300,
+                      }}
+                    >
+                      {edu.note[lang]}
+                    </div>
+                  )}
                 </div>
               ))}
             </div>
@@ -1549,7 +1670,8 @@ export default function Portfolio() {
         </div>
       </section>
 
-      {/* BLOG */}
+      {/* BLOG (hidden until posts exist, see SHOW_BLOG) */}
+      {SHOW_BLOG && (
       <section id="blog" style={{ padding: "80px 20px" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <div
@@ -1663,6 +1785,7 @@ export default function Portfolio() {
           </div>
         </div>
       </section>
+      )}
 
       {/* CONTACT */}
       <section
@@ -1743,12 +1866,13 @@ export default function Portfolio() {
                     label: "github.com/iamgaurav07",
                     href: "https://github.com/iamgaurav07",
                   },
-                  { icon: "📍", label: "Berlin, Germany", href: "#" },
+                  { icon: "📍", label: "Meiningen, Germany", href: "#" },
                 ].map((link) => (
                   <a
                     key={link.label}
                     href={link.href}
                     target={link.href.startsWith("http") ? "_blank" : undefined}
+                    rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
                     className="contact-link"
                     style={{
                       display: "flex",
@@ -1989,7 +2113,7 @@ export default function Portfolio() {
               color: "#5A5A54",
             }}
           >
-            © 2026 Gaurav Kumar · Berlin, Germany
+            © 2026 Gaurav Kumar · Meiningen, Germany
           </div>
           <div
             className="footer-links"
@@ -2004,6 +2128,7 @@ export default function Portfolio() {
                 key={label}
                 href={href}
                 target="_blank"
+                rel="noopener noreferrer"
                 style={{
                   fontFamily: "'DM Mono', monospace",
                   fontSize: 11,
